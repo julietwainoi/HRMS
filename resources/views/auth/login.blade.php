@@ -70,7 +70,7 @@
                 <a href="{{ route('password.request') }}">I forgot my password</a>
             </p>
             <p class="mb-0">
-                <a href="" class="text-center"></a>
+                <a href="{{route('register')}}" class="text-center">Register</a>
             </p>
         </div>
         <!-- /.card-body -->
