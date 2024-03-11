@@ -13,6 +13,20 @@
             <form method="POST" action="{{ route('register') }}">
                 @csrf
                 <div class="input-group mb-3">
+                    <input id="id" type="text" class="form-control @error('id') is-invalid @enderror" name="id"
+                        value="{{ old('id') }}" required autocomplete="id" autofocus placeholder="ID NO">
+                    @error('id')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                    @enderror
+                    <div class="input-group-append">
+                        <div class="input-group-text">
+                            <span class="fas fa-user"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="input-group mb-3">
                     <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name"
                         value="{{ old('name') }}" required autocomplete="name" autofocus placeholder="Name">
                     @error('name')
