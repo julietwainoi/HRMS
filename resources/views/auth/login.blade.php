@@ -1,16 +1,10 @@
-@extends('layouts.app')
-
+@extends('auth.Layouts.app')
 @section('content')
-<div class="container" style="padding-top: 80px;" >
-<div class="login-box d-flex justify-content-center align-items-center">
+<div class="login-box">
     <!-- /.login-logo -->
     <div class="card card-outline card-primary">
-        <div class="card-header text-center"><head>
-    <!-- Other meta tags and stylesheets -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-</head>
-
-            <a href="" class="h1" style="text-decoration:none">Sign In</a>
+        <div class="card-header text-center">
+            <a href="" class="h1">Sign In</a>
         </div>
         <div class="card-body">
             <p class="login-box-msg">Sign in to start your session</p>
@@ -56,7 +50,7 @@
                         </div>
                     </div>
                     <!-- /.col -->
-                    <div class="col-6 offset-8 ">
+                    <div class="col-4">
                         <button type="submit" class="btn btn-primary btn-block">Sign In</button>
                     </div>
                     <!-- /.col -->
@@ -83,5 +77,5 @@
     </div>
     <!-- /.card -->
 </div>
-</div>
+
 @endsection
