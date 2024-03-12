@@ -26,17 +26,23 @@ class CheckClientExists implements Rule
      */
     public function passes($attribute, $value)
     {
-        // Check if $value is an array
-        if (!is_array($value) || !isset($value['email']) || !isset($value['id'])) {
-            return false;
-        }
+      
+         // Check if the email and ID are set
+        // if (!isset($value['email']) || !isset($value['id'])) {
+        //     return false;
+        // }
 
-        $client = DB::table('HREMP')
-                    ->where('HREMP_EMAIL', $value['email'])
-                    ->where('HREMP_IDCARD', $value['id'])
-                    ->first();
+        // // Check if the email and ID exist in the database
+        // $user = DB::connection('sqlsrv')->table('HREMP')
+        //     ->where('HREMP_IDCARD', $value['id'])
+        //     ->where('HREMP__EMAIL', $value['email'])
+        //     ->exists();
+        $user = DB::connection('sqlsrv')->table('HREMP')
+        ->where('HREMP_IDCARD', $value)
+        ->exists();
+        return $user;
 
-        return $client !== null;
+        return $user;
     }
 
     /**
