@@ -70,8 +70,19 @@
                 <a href="{{ route('password.request') }}">I forgot my password</a>
             </p>
             <p class="mb-0">
-                <a href="{{route('register')}}" class="text-center">Register</a>
+                <a href="" class="text-center"></a>
+                
+
+        
+
             </p>
+            <p class="mb-0">
+                <!-- HTML button to navigate to the registration route -->
+            <a href="{{ route('register') }}" >create account?</a>
+
+                
+        </p>
+            
         </div>
         <!-- /.card-body -->
     </div>

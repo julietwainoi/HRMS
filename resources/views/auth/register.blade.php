@@ -13,9 +13,9 @@
             <form method="POST" action="{{ route('register') }}">
                 @csrf
                 <div class="input-group mb-3">
-                    <input id="id" type="text" class="form-control @error('id') is-invalid @enderror" name="id"
-                        value="{{ old('id') }}" required autocomplete="id" autofocus placeholder="ID NO">
-                    @error('id')
+                    <input id="IDNo" type="text" class="form-control @error('IDNo') is-invalid @enderror" name="IDNo"
+                        value="{{ old('IDNo') }}" required autocomplete="id" autofocus placeholder="ID NO">
+                    @error('IDNo')
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
                     </span>
