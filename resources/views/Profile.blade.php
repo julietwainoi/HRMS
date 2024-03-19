@@ -8,7 +8,7 @@
             </div>
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
-                    <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
+                    <li class="breadcrumb-item"><a href="{{ route('home') }}">Dashboard</a></li>
                     <li class="breadcrumb-item active">My Profile</li>
                 </ol>
             </div>
@@ -28,12 +28,17 @@
                     <!-- info row -->
                     <div class="row invoice-info">
                         <div class="col-sm-4 invoice-col">
-                            @if(isset($name) && isset($email))
-                            <p>Name: {{ $name }}</p>
-                            <p>Email: {{ $email }}</p>
-                            @else
-                            <p>User not logged in.</p>
-                            @endif
+                        @foreach ($data as $item)
+                         <p>IDNO:{{ $item->StaffNo }}</p>
+                          <p>PhoneNumber:{{ $item->MobilePhone }}</p>
+                          <p>MSN:{{$item-> HREMP_MSN}}</p>
+                          <p>Name: {{ $item->Names }}</p>
+                          <p> FirtsName:{{ $item->FirstName }}</p>
+                          <p>MiddleName:{{ $item->MiddleName }}</p>
+                          <p>lastName{{ $item->LastName}}</p>
+                          <p>JobCode:{{ $item-> JobCode}}</P>
+                       @endforeach
+
                         </div>
                     </div>
                     <!-- /.invoice -->

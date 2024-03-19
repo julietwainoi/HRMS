@@ -10,18 +10,34 @@ use Illuminate\Support\Facades\Auth;
 
 class ProfileController extends Controller
 {
-    public function CurrentProfile(){
     
-        $user = auth()->user();
+    
+    
+    
+   
+    
+    
+    public function CurrentProfile()
+    {
+        $IDNo = auth()->user()->IDNo;
 
-    if ($user) {
-        // User is logged in
-      return view('Profile',  ['name'=>$user->name,'email'=>$user->email]);
-    } else {
-        // User is not logged in
-        return view('Profile', "user not logged in");
-    } 
+        // Execute the parameterized query to fetch the data based on the authenticated user's IDNo
+        $data = DB::select("SELECT 
+            HREMP.HREMP_EMPID AS StaffNo,
+            HREMP.HREMP_PHONEC AS MobilePhone,
+            HREMP.HREMP_MSN,
+            HREMP.HREMP_NAME AS Names,
+            HREMP.HREMP_FNAME AS FirstName,
+            HREMP.HREMP_MNAME AS MiddleName,
+            HREMP.HREMP_LNAME AS LastName,
+            HREMP.HREMP_JOBID AS JobCode
+            FROM HREMP 
+            WHERE HREMP_IDCARD =$IDNo");
+      
+     
+        // Return the data to your view
+        return view('profile', compact('data'));
 
-}
+    }
  
 }
