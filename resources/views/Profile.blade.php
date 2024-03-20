@@ -4,12 +4,12 @@
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h4>Profile</h4>
+                <h4>Leave Form</h4>
             </div>
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
                     <li class="breadcrumb-item"><a href="{{ route('home') }}">Dashboard</a></li>
-                    <li class="breadcrumb-item active">My Profile</li>
+                    <li class="breadcrumb-item active">Edit Profile</li>
                 </ol>
             </div>
         </div>
@@ -20,28 +20,27 @@
         <div class="row">
             <div class="col-12">
                 <div class="invoice p-3 mb-3">
-                    <!-- title row -->
-                    <div class="row">
-
-                        <!-- /.col -->
-                    </div>
-                    <!-- info row -->
-                    <div class="row invoice-info">
-                        <div class="col-sm-4 invoice-col">
-                        @foreach ($data as $item)
-                         <p>IDNO:{{ $item->StaffNo }}</p>
-                          <p>Name:{{ $item->Names }}</p>
-                          <p>email:{{ $item->email }}</p>
-                       @endforeach
-
+                    <form name="leave" id="leave" method="post" action="{{url('/leave-form')}}">
+                        @csrf
+                        <!-- Input fields -->
+                        <div class="form-group">
+                            <label for="staffNo">IDNO:</label>
+                            <input type="text" class="form-control" id="staffNo" name="staffNo" value="{{ $data->StaffNo }}">
                         </div>
-                    </div>
-                    <!-- /.invoice -->
+                        <div class="form-group">
+                            <label for="name">Name:</label>
+                            <input type="text" class="form-control" id="name" name="name" value="{{ $data->Names }}">
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email:</label>
+                            <input type="email" class="form-control" id="email" name="email" value="{{ $data->email }}">
+                        </div>
+                        <!-- End of input fields -->
+                        <button type="submit" class="btn btn-primary">Update Profile</button>
+                    </form>
                 </div><!-- /.col -->
             </div><!-- /.row -->
         </div><!-- /.container-fluid -->
+    </div>
 </section>
-
-
-
 @endsection
