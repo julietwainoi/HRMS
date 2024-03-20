@@ -9,7 +9,6 @@
         "hot": "mix watch --hot",
         "prod": "npm run production",
         "production": "mix --production"
-     
     },
     "devDependencies": {
         "@popperjs/core": "^2.11.6",
@@ -23,5 +22,8 @@
         "sass": "^1.56.1",
         "vite": "^5.1.4"
     },
-    "type": "module"
+    "type": "module",
+    "dependencies": {
+        "bootstrap-datepicker": "^1.10.0"
+    }
 }

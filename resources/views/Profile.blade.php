@@ -30,13 +30,8 @@
                         <div class="col-sm-4 invoice-col">
                         @foreach ($data as $item)
                          <p>IDNO:{{ $item->StaffNo }}</p>
-                          <p>PhoneNumber:{{ $item->MobilePhone }}</p>
-                          <p>MSN:{{$item-> HREMP_MSN}}</p>
-                          <p>Name: {{ $item->Names }}</p>
-                          <p> FirtsName:{{ $item->FirstName }}</p>
-                          <p>MiddleName:{{ $item->MiddleName }}</p>
-                          <p>lastName{{ $item->LastName}}</p>
-                          <p>JobCode:{{ $item-> JobCode}}</P>
+                          <p>Name:{{ $item->Names }}</p>
+                          <p>email:{{ $item->email }}</p>
                        @endforeach
 
                         </div>
