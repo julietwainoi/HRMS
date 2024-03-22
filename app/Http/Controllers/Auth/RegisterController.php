@@ -54,6 +54,7 @@ class RegisterController extends Controller
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'IDNo' => ['required', ], // Add custom rule for ID
             'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'accounttype' =>['required', 'string', 'max:255']
             
         ]);
     }
@@ -71,6 +72,7 @@ class RegisterController extends Controller
             'email' => $data['email'],
             'IDNo' => $data['IDNo'],
             'password' => Hash::make($data['password']),
+            'accounttype' =>$data['accounttype']
         ]);
     }
 }

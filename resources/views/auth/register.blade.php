@@ -14,7 +14,7 @@
                 @csrf
                 <div class="input-group mb-3">
                     <input id="IDNo" type="text" class="form-control @error('IDNo') is-invalid @enderror" name="IDNo"
-                        value="{{ old('IDNo') }}" required autocomplete="id" autofocus placeholder="ID NO">
+                        value="{{ old('IDNo') }}" required autocomplete="IDNo" autofocus placeholder="ID NO">
                     @error('IDNo')
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
@@ -26,6 +26,7 @@
                         </div>
                     </div>
                 </div>
+
                 <div class="input-group mb-3">
                     <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name"
                         value="{{ old('name') }}" required autocomplete="name" autofocus placeholder="Name">
@@ -77,6 +78,10 @@
                         </div>
                     </div>
                 </div>
+                <div class="input-group mb-3">
+                    <input id="accounttype" type="text" class="form-control " name="accounttype"
+                        required autocomplete="accounttype"  placeholder="accounttype">
+                    </div>
                 <div class="row">
                     <div class="col-12">
                         <button type="submit" class="btn btn-primary btn-block">Register</button>

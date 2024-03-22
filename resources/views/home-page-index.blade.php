@@ -28,15 +28,24 @@
     <label for="exampleaddtitle">Email</label>
     <input type="email" id="email" name="email" class="form-control" required=""></textarea>
     </div>
-    <div class="form group">
-    <label for="leaves">Types of Leaves:</label>
-  <select name="leaves" id="leaves">
-    <option value="martenirty leave">martenirty leave</option>
-    <option value="martenirty leave">martenirty leave</option>
-    <option value="martenirty leave">martenirty leave</option>
-    <option value="martenirty leave">martenirty leave</option>
-  </select>
-</div>
+    <div class="form-group row">
+          <label for="type_of_leave" class="col-sm-2 col-form-label">Type of Leave</label>
+          <div class="col-sm-8">
+            <select class="form-control" name = "type_of_leave" id="type_of_leave" aria-label="Default select example" required>
+              <option selected disabled>Select a leave type</option>
+              <option value="Sick leave">Sick leave</option>
+              <option value="Casual leave">Casual leave</option>
+              <option value="Duty Leave">Duty Leave</option>
+              <option value="Maternity leave">Maternity leave</option>
+              <option value="Paternity leave">Paternity leave</option>
+              <option value="Bereavement leave">Bereavement leave</option>
+              <option value="Compensatory leave">Compensatory leave</option>
+              <option value="Sabbatical leave">Sabbatical leave</option>
+              <option value="Unpaid Leave">Unpaid Leave</option>
+
+            </select>
+          </div>
+        </div>
 <div class="form group">
   <label for="startdate">startdate:</label>
   <input type="date" id="startdate" name="startdate">
