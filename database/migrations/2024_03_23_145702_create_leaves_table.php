@@ -14,19 +14,16 @@ return new class extends Migration
     public function up()
     {
         Schema::create('leaves', function (Blueprint $table) {
-          
-        $table->increments('auto_id')->nullable(false);
-        $table->string('staff_id')->unique();
-        $table->string('type_of_leave')->nullable(false);
-        $table->string('description',4000)->nullable(false);
-        $table->date('date_of_leave')->nullable(false);
-        $table->date('end_of_leave')->nullable(false);
-        $table->datetime('date_of_request')->nullable(false);
-        $table->string('approval_status')->nullable(false);
-
+            $table->increments('id');
+            $table->string('staff_id')->nullable(false);
+            $table->string('type_of_leave')->nullable(false);
+            $table->string('description')->nullable(false);
+            $table->string('date_of_leave')->nullable(false);
+            $table->string('end_of_leave')->nullable(false);
+            $table->string('approval_status')->nullable(false);
+            $table->timestamps(); // This creates `created_at` and `updated_at` columns
         });
     }
-
     /**
      * Reverse the migrations.
      *
