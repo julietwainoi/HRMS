@@ -7,11 +7,17 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Model;
 use Laravel\Sanctum\HasApiTokens;
-
+use App\Models\User;
 class leave extends Model
 {
-    use HasFactory,HasFactory, Notifiable;
+    use HasFactory, Notifiable;
 
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'staff_id', 'IDNo');
+    }
+    
+    
     protected $fillable = [
         'staff_id',
         'type_of_leave',
@@ -23,6 +29,9 @@ class leave extends Model
 
     ];
 
+    protected $attributes = [
+        'approval_status' => 'Pending',
+    ];
 
 
 

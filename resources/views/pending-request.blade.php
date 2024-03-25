@@ -3,7 +3,7 @@
 
 <div class="card">
     <div class="card-body">
-      <h3 class="panel-title" style="text-align:center;">My Pending Requests</h3>
+      <h3 class="panel-title" style="text-align:center;"> Pending Requests</h3>
       <br>
 
 
