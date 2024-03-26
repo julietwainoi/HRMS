@@ -8,10 +8,20 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use App\Models\leave;
+use App\Models\Role;
 class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
-
+    
+    public function leaves()
+    {
+        return $this->hasMany(leave::class,'staff_id', 'IDNo');
+    }
+    
+    public function roles()
+    {
+        return $this->belongsToMany(Role::class);
+    }
     /**
      * The attributes that are mass assignable.
      *
@@ -46,8 +56,5 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
     
-    public function leaves()
-    {
-        return $this->hasMany(leave::class,'staff_id', 'IDNo');
-    }
+ 
 }
