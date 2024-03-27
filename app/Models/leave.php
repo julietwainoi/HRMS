@@ -8,7 +8,7 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Model;
 use Laravel\Sanctum\HasApiTokens;
 use App\Models\User;
-class leave extends Model
+class Leave extends Model
 {
     use HasFactory, Notifiable;
 

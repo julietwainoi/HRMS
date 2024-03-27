@@ -1,9 +1,9 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Models\Leave;
 
 use Illuminate\Http\Request;
-use App\Models\Leave;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 class LeaveController extends Controller
@@ -80,7 +80,7 @@ public function pendingRequestsleave()
     $user = Auth::user();
     
     // Fetch pending leave requests of the current user
-    $leave_pending_data = $user->leaves()->where('approval_status', 'Pending')->get();
+    $leave_pending_data = $user->leavess()->where('approval_status', 'Pending')->get();
 
     // Pass the data to the view
     return view('leave', ['leave_pending_data' => $leave_pending_data]);
