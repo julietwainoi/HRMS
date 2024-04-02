@@ -38,3 +38,9 @@ Route::get('/assignRole/{userId}/{roleId}',[UserController::class, 'assignRole']
 Route::get('/accept-request/{id}', [LeaveController::class, 'acceptRequest'])->middleware('checkUserRole');
 Route::get('/reject-request/{id}', [LeaveController::class, 'rejectRequest'])->middleware('checkUserRole');
 Route::get('/unauthorized', function () { return 'Unauthorized access!';})->name('unauthorized');
+use App\Http\Controllers\LeaveCodesController;
+
+// Define a route to call the LeaveCodeInstances method
+Route::get('/create-leave-codes', function () {$leaveCodesController = new LeaveCodesController();
+     return $leaveCodesController->LeaveCodeInstances();
+});
