@@ -6,6 +6,7 @@ use App\Http\Controllers\databaseController;
 use App\Http\Controllers\LeaveController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\DeleteController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -44,3 +45,6 @@ use App\Http\Controllers\LeaveCodesController;
 Route::get('/create-leave-codes', function () {$leaveCodesController = new LeaveCodesController();
      return $leaveCodesController->LeaveCodeInstances();
 });
+// routes/web.php
+Route::post('/leavecodes', [LeaveCodesController::class, 'store'])->name('leavecodes.store');
+Route::get('/LeavesCode',[App\Http\Controllers\LeaveCodesController::class, 'index']);

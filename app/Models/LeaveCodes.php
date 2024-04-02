@@ -16,5 +16,5 @@ class LeaveCodes extends Model
     
 
     ];
-    protected $table = 'leavecodes';
+protected $table = 'leavecodes';
 }

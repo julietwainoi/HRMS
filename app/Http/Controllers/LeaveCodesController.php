@@ -6,35 +6,40 @@ use Illuminate\Http\Request;
 use App\Models\LeaveCodes;
 class LeaveCodesController extends Controller
 {
-    
-    
-        public function LeaveCodeInstances()
-        {
-            // Define an array of leave code data
-            $leaveCodesData = [
-                ['LeaveCode' => 'L-001', 'LeaveDesc' => 'Sick Leave', 'LeaveDays' => '3 days'],
-                ['LeaveCode' => 'L-002', 'LeaveDesc' => 'Casual Leave', 'LeaveDays' => '2 days'],
-                ['LeaveCode' => 'L-003', 'LeaveDesc' => 'Duty Leave', 'LeaveDays' => '2 days'],
-                ['LeaveCode' => 'L-004', 'LeaveDesc' => 'Maternity Leave', 'LeaveDays' => '90 days'],
-                ['LeaveCode' => 'L-005', 'LeaveDesc' => 'Paternity Leave', 'LeaveDays' => '14 days'],
-                ['LeaveCode' => 'L-006', 'LeaveDesc' => 'Bereavement Leave', 'LeaveDays' => '10 days'],
-                ['LeaveCode' => 'L-007', 'LeaveDesc' => 'Compensatory Leave', 'LeaveDays' => '10 days'],
-                ['LeaveCode' => 'L-008', 'LeaveDesc' => 'Sabbatical Leave', 'LeaveDays' => '10 months'],
-                ['LeaveCode' => 'L-009', 'LeaveDesc' => 'Unpaid Leave', 'LeaveDays' => '10 months']
-            ];
-    
-            // Loop through the leave code data and create or retrieve each leave code
-            foreach ($leaveCodesData as $leaveCodeData) {
-                LeaveCodes::firstOrCreate(
-                    ['LeaveCode' => $leaveCodeData['LeaveCode']],
-                    ['LeaveDesc' => $leaveCodeData['LeaveDesc'], 'LeaveDays' => $leaveCodeData['LeaveDays']]
-                );
-            }
-    
-            // Optionally, you can return a response indicating success or perform additional actions
-            
-            return response()->json(['message' => 'Leave codes created successfully'], 200);
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
+
+
+
+    public function index(){
+        return view ('LeavesCode');
         }
+        public function store(Request $request)
+        {
+            // Validate the incoming request data
+            $request->validate([
+                'leave_code' => 'required|string',
+                'leave_desc' => 'required|string',
+                'leave_days' => 'required|numeric',
+            ]);
+    
+            // Create a new LeaveCodes instance and fill it with the submitted data
+            $leaveCode = new LeaveCodes();
+            $leaveCode->LeaveCode = $request->leave_code;
+            $leaveCode->LeaveDesc = $request->leave_desc;
+            $leaveCode->LeaveDays = $request->leave_days;
+    
+            // Save the leave code data to the database
+            $leaveCode->save();
+    
+            return redirect('/LeavesCode')->with('success', 'Leave code submitted successfully.');
+            // Redirect back with a success message
+            //return redirect()->back()->with('success', 'Leave code data added successfully.');
+        }
+    
     }
     
 
