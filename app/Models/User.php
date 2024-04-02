@@ -17,6 +17,10 @@ class User extends Authenticatable
     {
         return $this->hasMany(Leave::class,'staff_id', 'IDNo');
     }
+    public function hasRole($role)
+    {
+        return $this->roles()->where('name', $role)->exists();
+    }
     
     public function roles()
     {

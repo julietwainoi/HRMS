@@ -12,7 +12,11 @@
      <div class='card'>
         <div class="card-header text-center font-weight-bold">
             Applying for Leave
-        </div>
+        </div style="margin-left:250px;">@if(session('success'))
+    <div class="alert alert-success">
+        {{ session('success') }}
+    </div>
+@endif
     <div class="card-body">
   
         <form name="leave" id="leave" method="post" action="{{url('/leave-form')}}">
@@ -67,31 +71,61 @@
 
 
 </div>
+
 @endsection
 @section('another_section')
 <div class="card">
-    <div class="card-body">
+    <div class="card-body" style="margin-left:250px;">
         <h3 class="panel-title" style="text-align:center;">Pending Requests</h3>
         <br>
+        <div class="table-responsive">
+            <table class="table table-bordered">
+                <thead class="bg-dark text-white">
+                    <tr>
+                        <th>Date of Leave</th>
+                        <th>Request Sent On</th>
+                        <th>Leave Type</th>
+                        <th>Staff ID Number</th>
+                        <th>Reason For Leave</th>
+                        <th>Leave Status</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($all_leave_data as $key => $data)
+                    @php
+                        $cardColor = '';
 
-        @foreach ($leave_pending_data as $key => $data)
-        <div class="card text-white bg-dark mb-3"  style="margin-left:250px;">
-            <div class="card-header bg-dark">
-                <strong>{{ $data->date_of_leave }}</strong>
-                <i class="float-right" style="font-size:85%;">Request sent on: {{ $data->date_of_request }}</i>
-            </div>
-            <div class="card-body">
-        
-            <tr>
-           
-            <td>Leave type:{{ $data->type_of_leave }}</td><br>
-            <td>Staff ID Number:{{ $data->staff_id }}<td><br>
-            <td>Reason For Leave:{{ $data->description }}<td><br>
-           </tr>
-                <a class="btn btn-danger float-right confirmation" href="/delete-leave-pending-request-in-staff-account/{{ $data->auto_id }}">Delete Request</a>
-            </div>
+                        switch ($data->approval_status) {
+                            case '[PENDING]':
+                                $cardColor = 'bg-primary'; // Green color for pending status
+                                break;
+                            case '[REJECTED]':
+                                $cardColor = 'bg-warning'; // Yellow color for rejected status
+                                break;
+                            case '[ACCEPTED]':
+                                $cardColor = 'bg-success'; // Blue color for accepted status
+                                break;
+                            default:
+                                $cardColor = ''; // Default color if status is unknown
+                                break;
+                        }
+                    @endphp
+                    <tr class="{{ $cardColor }}">
+                        <td>{{ $data->date_of_leave }}</td>
+                        <td>{{ $data->date_of_request }}</td>
+                        <td>{{ $data->type_of_leave }}</td>
+                        <td>{{ $data->staff_id }}</td>
+                        <td>{{ $data->description }}</td>
+                        <td>{{ $data->approval_status }}</td>
+                        <td>
+                            <a href="/delete-leave-pending-request-in-staff-account/{{ $data->auto_id }}" class="btn btn-danger confirmation">Delete Request</a>
+                        </td>
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
         </div>
-        @endforeach
     </div>
 </div>
 @endsection

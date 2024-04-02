@@ -25,9 +25,16 @@ Auth::routes();
 
 Route::get('/leave',[App\Http\Controllers\LeaveController::class, 'index']);
 Route::post('/leave-form',[App\Http\Controllers\LeaveController::class, 'insertLeaveData']);
-Route::get('/pending-request',[App\Http\Controllers\LeaveController::class, 'adminpendingRequests']);
+Route::get('/pending-request',[App\Http\Controllers\LeaveController::class, 'adminpendingRequests'])->middleware('checkUserRole');
 Route::get('/leave',[App\Http\Controllers\LeaveController::class, 'pendingRequestsleave']);
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/profile', [App\Http\Controllers\ProfileController::class, 'CurrentProfile'])->name('profile');
 Route::get('/create-roles', [RoleController::class, 'RoleInstances']);
 Route::get('/assignRole/{userId}/{roleId}',[UserController::class, 'assignRole']);
+
+// routes/web.php
+
+
+Route::get('/accept-request/{id}', [LeaveController::class, 'acceptRequest'])->middleware('checkUserRole');
+Route::get('/reject-request/{id}', [LeaveController::class, 'rejectRequest'])->middleware('checkUserRole');
+Route::get('/unauthorized', function () { return 'Unauthorized access!';})->name('unauthorized');

@@ -3,27 +3,40 @@
 
 <div class="card">
     <div class="card-body">
-      <h3 class="panel-title" style="text-align:center;"> Pending Requests</h3>
-      <br>
-
-
-@foreach ($leave_pending_data as $key => $data)
-    <div class="card text-white bg-dark mb-3">
-        <div class="card-header bg-dark">
-            <strong>{{ $data->date_of_leave }}</strong>
-            <i class="float-right" style="font-size:85%;">Request sent on: {{ $data->date_of_request }}</i>
-        </div>
-        <div class="card-body">
-            <tr>
-           
-            <td>Leave type:{{ $data->type_of_leave }}</td><br>
-            <td>Staff ID Number:{{ $data->staff_id }}<td><br>
-            <td>Reason For Leave:{{ $data->description }}<td><br>
-           </tr>
-            <a class="btn btn-danger float-right confirmation" href="/delete-leave-pending-request-in-staff-account/{{ $data->auto_id }}">Delete Request</a>
+        <h3 class="panel-title" style="text-align:center;">Pending Requests</h3>
+        <br>
+        <div class="table-responsive">
+            <table class="table table-bordered">
+                <thead class="bg-dark text-white">
+                    <tr>
+                        <th>Date of Leave</th>
+                        <th>End of Leave</th> <!-- Added this column -->
+                        <th>Request Sent On</th>
+                        <th>Leave Type</th>
+                        <th>Staff ID Number</th>
+                        <th>Reason For Leave</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($leave_pending_data as $key => $data)
+                    <tr>
+                        <td>{{ $data->date_of_leave }}</td>
+                        <td>{{ $data->end_of_leave }}</td> <!-- Added data for end_of_leave -->
+                        <td>{{ $data->created_at }}</td>
+                        <td>{{ $data->type_of_leave }}</td>
+                        <td>{{ $data->staff_id }}</td>
+                        <td>{{ $data->description }}</td>
+                        <td>
+                            <a href="/reject-request/{{$data->id}}" class="btn btn-danger">Decline</a>
+                            <a href="/accept-request/{{$data->id}}" class="btn btn-primary">Accept</a>
+                        </td>
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
         </div>
     </div>
-@endforeach
 </div>
-</div>
+
 @endsection

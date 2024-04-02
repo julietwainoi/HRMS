@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 use App\Models\Leave;
+use Illuminate\Support\Facades\Log;
 
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+
 class LeaveController extends Controller
 {
     public function __construct()
@@ -80,11 +82,62 @@ public function pendingRequestsleave()
     $user = Auth::user();
     
     // Fetch pending leave requests of the current user
-    $leave_pending_data = $user->leavess()->where('approval_status', 'Pending')->get();
+    $all_leave_data = $user->leavess()->get();
 
     // Pass the data to the view
-    return view('leave', ['leave_pending_data' => $leave_pending_data]);
+    return view('leave', ['all_leave_data' => $all_leave_data]);
 }
 
+    // Check if the user has the "admin" role
+    public function acceptRequest($id)
+    {
+        // Retrieve the authenticated user
+        $user = auth()->user();
+    
+        // Check if the user has the "admin" role
+        if ($user->hasRole('admin')) {
+            // Find the leave by its ID
+            $leave = Leave::find($id);
+    
+            if ($leave) {
+                // Update the approval status of the leave
+                $leave->approval_status = "[ACCEPTED]";
+                $leave->save();
+    
+                return redirect()->back()->with('message', 'Request accepted successfully.');
+            } else {
+                // Handle case where leave with the specified ID is not found
+                return redirect()->back()->with('message', 'Leave not found.');
+            }
+        } else {
+            // Handle unauthorized access for non-admin users
+            return redirect()->back()->with('message', 'Unauthorized access.');
+        }
+    }
+    public function rejectRequest($id)
+{
+    // Retrieve the authenticated user
+    $user = auth()->user();
+
+    // Check if the user has the "admin" role
+    if ($user->hasRole('admin')) {
+        // Find the leave by its ID
+        $leave = Leave::find($id);
+
+        if ($leave) {
+            // Update the approval status of the leave to rejected
+            $leave->approval_status = "[REJECTED]";
+            $leave->save();
+
+            return redirect()->back()->with('message', 'Request rejected successfully.');
+        } else {
+            // Handle case where leave with the specified ID is not found
+            return redirect()->back()->with('message', 'Leave not found.');
+        }
+    } else {
+        // Handle unauthorized access for non-admin users
+        return redirect()->back()->with('message', 'Unauthorized access.');
+    }
+}
 
 }
