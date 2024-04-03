@@ -17,6 +17,11 @@
         {{ session('success') }}
     </div>
 @endif
+</div style="margin-left:250px;"> @if(session('error'))
+        <div class="alert alert-danger">
+            {{ session('error') }}
+        </div>
+        @endif
     <div class="card-body">
   
         <form name="leave" id="leave" method="post" action="{{url('/leave-form')}}">
@@ -26,9 +31,9 @@
     <input type="text" id="staff_id" name="staff_id" class="form-control" required="">
     </div><br>
    
-   <div class="form-group row">
+   <div class="form-group ">
           <label for="type_of_leave" class="col-sm-2 col-form-label">Type of Leave</label>
-          <div class="col-sm-8">
+          <div class="col-sm-12">
             <select class="form-control" name = "type_of_leave" id="type_of_leave" aria-label="Default select example" required>
               <option selected disabled>Select a leave type</option>
               <option value="Sick leave">Sick leave</option>

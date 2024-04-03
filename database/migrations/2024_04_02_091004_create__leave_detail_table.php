@@ -13,10 +13,14 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('leavecodes', function (Blueprint $table) {
-            $table->string('LeaveCode')->nullable(false)->unique();
+        Schema::create('LeaveDetail', function (Blueprint $table) {
+            $table->id();
+     
+            $table->string('EmployeeID')->nullable(false);
+            $table->string('LeaveCode')->nullable(false);
             $table->string('LeaveDesc')->nullable(false);
             $table->string('LeaveDays')->nullable(false);
+             $table->string('RemainingDays')->nullable(false);
             $table->timestamps();
         });
     }
@@ -28,6 +32,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('leavecodes');
+        Schema::dropIfExists('LeaveDetail');
     }
 };

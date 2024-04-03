@@ -17,4 +17,9 @@ class LeaveCodes extends Model
 
     ];
 protected $table = 'leavecodes';
+
+public function leaveDetails()
+{
+    return $this->hasMany(LeaveDetail::class);
+}
 }

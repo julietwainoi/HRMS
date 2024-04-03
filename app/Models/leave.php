@@ -33,6 +33,9 @@ class Leave extends Model
         'approval_status' => 'Pending',
     ];
 
-
+    public function leaveDetail()
+    {
+        return $this->hasOne(LeaveDetail::class, 'EmployeeID', 'staff_id');
+    }
 
 }

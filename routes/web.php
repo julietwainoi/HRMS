@@ -7,6 +7,8 @@ use App\Http\Controllers\LeaveController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\DeleteController;
+use App\Http\Controllers\LeaveDetailController;
+use App\Http\Controllers\LeaveCodesController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -23,28 +25,35 @@ Route::get('/', function () {
 });
 
 Auth::routes();
-
+//leave application form
 Route::get('/leave',[App\Http\Controllers\LeaveController::class, 'index']);
 Route::post('/leave-form',[App\Http\Controllers\LeaveController::class, 'insertLeaveData']);
-Route::get('/pending-request',[App\Http\Controllers\LeaveController::class, 'adminpendingRequests'])->middleware('checkUserRole');
 Route::get('/leave',[App\Http\Controllers\LeaveController::class, 'pendingRequestsleave']);
+//pending request for admin
+Route::get('/pending-request',[App\Http\Controllers\LeaveController::class, 'adminpendingRequests'])->middleware('checkUserRole');
+
+
+//home page
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+//user profile
 Route::get('/profile', [App\Http\Controllers\ProfileController::class, 'CurrentProfile'])->name('profile');
+//assignRoles
 Route::get('/create-roles', [RoleController::class, 'RoleInstances']);
+ 
 Route::get('/assignRole/{userId}/{roleId}',[UserController::class, 'assignRole']);
 
 // routes/web.php
 
-
+//admin reject or accept leave
 Route::get('/accept-request/{id}', [LeaveController::class, 'acceptRequest'])->middleware('checkUserRole');
 Route::get('/reject-request/{id}', [LeaveController::class, 'rejectRequest'])->middleware('checkUserRole');
+//unauthorized  route
 Route::get('/unauthorized', function () { return 'Unauthorized access!';})->name('unauthorized');
-use App\Http\Controllers\LeaveCodesController;
 
-// Define a route to call the LeaveCodeInstances method
-Route::get('/create-leave-codes', function () {$leaveCodesController = new LeaveCodesController();
-     return $leaveCodesController->LeaveCodeInstances();
-});
-// routes/web.php
+//for storing leavecodes
 Route::post('/leavecodes', [LeaveCodesController::class, 'store'])->name('leavecodes.store');
 Route::get('/LeavesCode',[App\Http\Controllers\LeaveCodesController::class, 'index']);
+
+//adding leaves for the employees
+Route::post('/leavedetail', [LeaveDetailController::class, 'InsertLeaveDetail'])->name('leaveDetail.store');
+Route::get('/LeaveDetail', [LeaveDetailController::class, 'index']);

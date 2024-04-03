@@ -26,6 +26,12 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Role::class);
     }
+    // Define the relationship with LeaveDetail
+public function leaveDetails()
+{
+    return $this->hasMany(LeaveDetail::class, 'EmployeeID', 'IDNo');
+}
+
     /**
      * The attributes that are mass assignable.
      *
