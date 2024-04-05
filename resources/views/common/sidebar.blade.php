@@ -36,46 +36,55 @@
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                 <!-- Add icons to the links using the .nav-icon class with font-awesome or any other icon font library -->
                 <li class="nav-item">
-                    <a href="#" class="nav-link">
+                  <a href="{{route('dashboard')}}" class="nav-link">
+                      <i class="nav-icon fas fa-tachometer-alt"></i>
+                      <p>
+                         Dashboard
+                          <i class="right fas fa-angle-right"></i>
+                      </p>
+                  </a>
+              </li>
+                <li class="nav-item">
+                    <a href="{{route('admin.pendingRequests')}}" class="nav-link">
                         <i class="nav-icon fas fa-tachometer-alt"></i>
                         <p>
-                            Dashboard
+                            Leave Requests
                             <i class="right fas fa-angle-right"></i>
                         </p>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="#" class="nav-link">
+                    <a href="{{route('leave')}}" class="nav-link">
                         <i class="nav-icon fas fa-users"></i>
                         <p>
-                            Employee List
+                            Leave Application
                             <i class="right fas fa-angle-right"></i>
                         </p>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="#" class="nav-link">
+                    <a href="{{route('staffleaves')}}" class="nav-link">
                         <i class="nav-icon fa fa-list-alt"></i>
                         <p>
-                            Department List
+                            leave History
                             <i class="right fas fa-angle-right"></i>
                         </p>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="#" class="nav-link">
+                    <a href="{{route('LeaveDetail')}}" class="nav-link">
                         <i class="nav-icon fa fa-window-restore"></i>
                         <p>
-                            Leave Types
+                            Leave Assignment 
                             <i class="right fas fa-angle-right"></i>
                         </p>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="#" class="nav-link">
+                    <a href="{{route('leave')}}" class="nav-link">
                         <i class="nav-icon fa fa-envelope-open"></i>
                         <p>
-                            Leave Applications
+                          Register User
                             <i class="right fas fa-angle-right"></i>
                         </p>
                     </a>

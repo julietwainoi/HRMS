@@ -2,21 +2,21 @@
 @section('content')
 
 
-    <meta name="csrf-token" content="{{csrf_token() }}">
-    <link href='//stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha2/css/bootstrap.min.css' rel='stylesheet'>
-    <title>employee form</title>
-
-<body>
-
-
-     <div class='card'>
-        <div class="card-header text-center font-weight-bold">
-            Applying for Leave
-        </div style="margin-left:250px;">@if(session('success'))
-    <div class="alert alert-success">
-        {{ session('success') }}
-    </div>
-@endif
+<div class="card" style="margin-left:50px;margin-right: 50px;margin-top: 10px">
+  <div class="col-sm-12 card-header bg-dark text-center font-weight-bold ">
+  APPLY LEAVE
+  </div>
+  <div class="card-body">
+      @if(session('success'))
+      <div class="alert alert-success">
+          {{ session('success') }}
+      </div>
+      @endif
+      @if(session('error'))
+      <div class="alert alert-danger">
+          {{ session('error') }}
+      </div>
+      @endif
 </div style="margin-left:250px;"> @if(session('error'))
         <div class="alert alert-danger">
             {{ session('error') }}
@@ -78,7 +78,7 @@
 </div>
 
 @endsection
-@section('another_section')
+{{--@section('another_section')
 <div class="card">
     <div class="card-body" style="margin-left:250px;">
         <h3 class="panel-title" style="text-align:center;">Pending Requests</h3>
@@ -133,4 +133,4 @@
         </div>
     </div>
 </div>
-@endsection
+@endsection--}}

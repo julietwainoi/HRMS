@@ -49,7 +49,7 @@
         <!-- /.content-wrapper -->
         
     <!-- Another section -->
-    @yield('another_section')
+ 
 
         @include('common.footer')
         <!-- Control Sidebar -->

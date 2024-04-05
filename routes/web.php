@@ -26,11 +26,15 @@ Route::get('/', function () {
 
 Auth::routes();
 //leave application form
-Route::get('/leave',[App\Http\Controllers\LeaveController::class, 'index']);
+Route::get('/leave',[App\Http\Controllers\LeaveController::class, 'index'])->name('leave');
 Route::post('/leave-form',[App\Http\Controllers\LeaveController::class, 'insertLeaveData']);
-Route::get('/leave',[App\Http\Controllers\LeaveController::class, 'pendingRequestsleave']);
+Route::get('/staffleaves', [App\Http\Controllers\LeaveController::class, 'pendingRequestsleave'])->name('staffleaves');
+
 //pending request for admin
-Route::get('/pending-request',[App\Http\Controllers\LeaveController::class, 'adminpendingRequests'])->middleware('checkUserRole');
+Route::get('/pending-request', [App\Http\Controllers\LeaveController::class, 'adminpendingRequests'])
+    ->middleware('checkUserRole')
+    ->name('admin.pendingRequests');
+
 
 
 //home page
@@ -56,4 +60,5 @@ Route::get('/LeavesCode',[App\Http\Controllers\LeaveCodesController::class, 'ind
 
 //adding leaves for the employees
 Route::post('/leavedetail', [LeaveDetailController::class, 'InsertLeaveDetail'])->name('leaveDetail.store');
-Route::get('/LeaveDetail', [LeaveDetailController::class, 'index']);
+Route::get('/LeaveDetail', [LeaveDetailController::class, 'index'])->name('LeaveDetail');
+Route::get('/dashboard', [LeaveDetailController::class, 'showLeaveDetails'])->name('dashboard');

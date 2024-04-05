@@ -104,7 +104,7 @@ public function pendingRequestsleave()
     $all_leave_data = $user->leavess()->get();
 
     // Pass the data to the view
-    return view('leave', ['all_leave_data' => $all_leave_data]);
+    return view('staffleaves', ['all_leave_data' => $all_leave_data]);
 }
 
     // Check if the user has the "admin" role
@@ -137,8 +137,8 @@ public function pendingRequestsleave()
                     // Update remaining leave days in the leave detail
                     $leaveDetail->RemainingDays -= $leaveDays;
                     $leaveDetail->save();
-    
-                    return redirect()->back()->with('message', 'Request accepted successfully.');
+                    return redirect('staffleaves')->with('success', 'Leave assigned successfully.');
+                    //return redirect()->back()->with('message', 'Request accepted successfully.');
                 } else {
                     // Handle case where leave detail is not found
                     return redirect()->back()->with('error', 'Leave detail not found.');
@@ -170,11 +170,11 @@ public function pendingRequestsleave()
             return redirect()->back()->with('message', 'Request rejected successfully.');
         } else {
             // Handle case where leave with the specified ID is not found
-            return redirect()->back()->with('message', 'Leave not found.');
+            return redirect()->back()->with('error', 'Leave not found.');
         }
     } else {
         // Handle unauthorized access for non-admin users
-        return redirect()->back()->with('message', 'Unauthorized access.');
+        return redirect()->back()->with('error', 'Unauthorized access.');
     }
 }
 

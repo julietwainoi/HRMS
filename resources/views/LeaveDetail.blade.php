@@ -3,8 +3,8 @@
 @extends('layouts.master')
 
 @section('content')
-<div class="card">
-    <div class="col-sm-12 card-header bg-success text-center font-weight-bold ">
+<div class="card" style="margin-left:50px;margin-right: 50px;margin-top: 10px">
+    <div class="col-sm-12 card-header bg-dark text-center font-weight-bold ">
       ASSIGN LEAVES
     </div>
     <div class="card-body">

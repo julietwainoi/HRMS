@@ -2,7 +2,7 @@
 @section('content')
 
 <div class="card">
-    <div class="card-body">
+    <div class="card-body col-sm-12">
         <h3 class="panel-title" style="text-align:center;">Pending Requests</h3>
         <br>
         <div class="table-responsive">

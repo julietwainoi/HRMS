@@ -56,4 +56,14 @@ class LeaveDetailController extends Controller
 }
 
 }
+public function showLeaveDetails()
+{
+    // Get the current user's IDNo
+    $IDNo = auth()->user()->IDNo;
+    
+    // Retrieve leave details associated with the current user
+    $leaveDetails =LeaveDetail::where('EmployeeID', $IDNo)->get();
+    
+    return view('Dashboard')->with('leaveDetails', $leaveDetails);
+}
 }
