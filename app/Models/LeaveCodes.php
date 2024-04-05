@@ -22,4 +22,8 @@ public function leaveDetails()
 {
     return $this->hasMany(LeaveDetail::class);
 }
+public function leave()
+{
+    return $this->hasMany(Leave::class);
+}
 }

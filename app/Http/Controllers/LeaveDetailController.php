@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 use App\Models\LeaveDetail;
 use Illuminate\Http\Request;
-
+use App\Models\LeaveCodes;
 class LeaveDetailController extends Controller
 {
     public function __construct()
@@ -27,7 +27,7 @@ class LeaveDetailController extends Controller
         // Validate the incoming request data
         $validatedData = $request->validate([
             'EmployeeID' => 'required|string',
-            'LeaveCode' => 'required|string',
+            'LeaveCode' => 'nullable|string',
             'LeaveDesc' => 'required|string',
             'LeaveDays'=> 'required|numeric',
             'RemainingDays' => 'required|numeric',
@@ -65,5 +65,21 @@ public function showLeaveDetails()
     $leaveDetails =LeaveDetail::where('EmployeeID', $IDNo)->get();
     
     return view('Dashboard')->with('leaveDetails', $leaveDetails);
+}
+public function showLeaveDescriptions()
+{
+    try {
+        // Retrieve all leave descriptions from the database
+        $leaveDescriptions = LeaveCodes::pluck('LeaveDesc');
+
+        // Dump the leaveDescriptions variable
+        //dd($leaveDescriptions);
+
+        // Pass the leave descriptions to the view
+        return view('LeaveDetail', ['leaveDescriptions' => $leaveDescriptions]);
+    } catch (\Exception $e) {
+        // Handle any exceptions, maybe log them, and return an error response
+        return back()->withError('Failed to retrieve leave descriptions. Please try again later.');
+    }
 }
 }

@@ -81,7 +81,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{route('leave')}}" class="nav-link">
+                    <a href="{{route('register')}}" class="nav-link">
                         <i class="nav-icon fa fa-envelope-open"></i>
                         <p>
                           Register User

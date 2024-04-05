@@ -11,13 +11,7 @@ use Illuminate\Support\Facades\Auth;
 class ProfileController extends Controller
 {
     
-    
-    
-    
-   
-    
-    
-    public function CurrentProfile()
+     public function CurrentProfile()
     {
         $IDNo = auth()->user()->id;
 

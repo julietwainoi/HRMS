@@ -11,18 +11,17 @@ class LeaveCodesController extends Controller
         $this->middleware('auth');
     }
 
-
-
-
-    public function index(){
+    public function index()
+    {
         return view ('LeavesCode');
-        }
-        public function store(Request $request)
+    }
+
+    public function store(Request $request)
         {
             // Validate the incoming request data
             $request->validate([
                 'leave_code' => 'required|string',
-                'leave_desc' => 'required|string',
+                'leave_desc' => 'nullable|string',
                 'leave_days' => 'required|numeric',
             ]);
     
@@ -37,9 +36,10 @@ class LeaveCodesController extends Controller
     
             return redirect('/LeavesCode')->with('success', 'Leave code submitted successfully.');
             // Redirect back with a success message
-            //return redirect()->back()->with('success', 'Leave code data added successfully.');
+           
         }
-    
+       
+        
     }
     
 

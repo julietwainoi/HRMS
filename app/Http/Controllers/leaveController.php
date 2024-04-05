@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Models\Leave;
+use App\Models\LeaveCodes;
 use Illuminate\Support\Facades\Log;
 use App\Models\LeaveDetail;
 use Illuminate\Http\Request;
@@ -10,29 +11,17 @@ use Illuminate\Support\Facades\Auth;
 
 class LeaveController extends Controller
 {
-    public function __construct()
-    {
+public function __construct()
+{
         $this->middleware('auth');
-    }
+}
 
-
-
-
-    public function index(){
+public function index()
+{
         return view ('leave');
-        }
-
-
-
-    // Other controller methods...
-
-
-
-
-
-
-    public function InsertLeaveData(Request $request)
-    {
+}
+public function InsertLeaveData(Request $request)
+{
     //try{
         // Validate the incoming request data
         $validatedData = $request->validate([
@@ -78,7 +67,7 @@ class LeaveController extends Controller
         } else {
             return redirect()->back()->with('error', 'Leave detail not found.');
         }
-    }
+  }
 // catch (\Exception $e) {
     // Handle exceptions
     //dd($e->getMessage()); // Dump exception message for debugging
@@ -108,8 +97,8 @@ public function pendingRequestsleave()
 }
 
     // Check if the user has the "admin" role
-    public function acceptRequest($id)
-    {
+public function acceptRequest($id)
+{
         // Retrieve the authenticated user
         $user = auth()->user();
     
@@ -151,30 +140,46 @@ public function pendingRequestsleave()
             // Handle unauthorized access for non-admin users
             return redirect()->back()->with('error', 'Unauthorized access.');
         }
-    }
-    public function rejectRequest($id)
+}
+public function rejectRequest($id)
 {
-    // Retrieve the authenticated user
-    $user = auth()->user();
+        // Retrieve the authenticated user
+        $user = auth()->user();
 
-    // Check if the user has the "admin" role
-    if ($user->hasRole('admin')) {
-        // Find the leave by its ID
-        $leave = Leave::find($id);
+        // Check if the user has the "admin" role
+        if ($user->hasRole('admin')) {
+            // Find the leave by its ID
+            $leave = Leave::find($id);
 
-        if ($leave) {
-            // Update the approval status of the leave to rejected
-            $leave->approval_status = "[REJECTED]";
-            $leave->save();
+            if ($leave) {
+                // Update the approval status of the leave to rejected
+                $leave->approval_status = "[REJECTED]";
+                $leave->save();
 
-            return redirect()->back()->with('message', 'Request rejected successfully.');
+                return redirect()->back()->with('message', 'Request rejected successfully.');
+            } else {
+                // Handle case where leave with the specified ID is not found
+                return redirect()->back()->with('error', 'Leave not found.');
+            }
         } else {
-            // Handle case where leave with the specified ID is not found
-            return redirect()->back()->with('error', 'Leave not found.');
+            // Handle unauthorized access for non-admin users
+            return redirect()->back()->with('error', 'Unauthorized access.');
         }
-    } else {
-        // Handle unauthorized access for non-admin users
-        return redirect()->back()->with('error', 'Unauthorized access.');
+}
+public function showLeaveDescriptions()
+{
+    try {
+        // Retrieve all leave descriptions from the database
+        $leaveDescriptions = LeaveCodes::pluck('LeaveDesc');
+
+        // Dump the leaveDescriptions variable
+        //dd($leaveDescriptions);
+
+        // Pass the leave descriptions to the view
+        return view('leave', ['leaveDescriptions' => $leaveDescriptions]);
+    } catch (\Exception $e) {
+        // Handle any exceptions, maybe log them, and return an error response
+        return back()->withError('Failed to retrieve leave descriptions. Please try again later.');
     }
 }
 

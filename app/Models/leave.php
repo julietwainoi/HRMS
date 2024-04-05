@@ -37,5 +37,12 @@ class Leave extends Model
     {
         return $this->hasOne(LeaveDetail::class, 'EmployeeID', 'staff_id');
     }
+    
+    public function LeaveCodes()
+    {
+        return $this->belongsTo(LeaveCodes::class);
+    }
+    
+  
 
 }

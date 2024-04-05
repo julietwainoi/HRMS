@@ -62,3 +62,7 @@ Route::get('/LeavesCode',[App\Http\Controllers\LeaveCodesController::class, 'ind
 Route::post('/leavedetail', [LeaveDetailController::class, 'InsertLeaveDetail'])->name('leaveDetail.store');
 Route::get('/LeaveDetail', [LeaveDetailController::class, 'index'])->name('LeaveDetail');
 Route::get('/dashboard', [LeaveDetailController::class, 'showLeaveDetails'])->name('dashboard');
+Route::get('/leavesCode', [LeaveCodesController::class,'store'])->name('leavesCode');
+//adding the dropdown  type of leave to leave assignment form & leave application form from the leavecode table
+Route::get('/LeaveDetail', [LeaveDetailController::class,'showLeaveDescriptions'])->name('LeaveDetail');
+Route::get('/leave', [LeaveController::class,'showLeaveDescriptions'])->name('leave');
