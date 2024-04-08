@@ -9,7 +9,7 @@
     <!-- Sidebar -->
     <div class="sidebar">
         <!-- Sidebar user panel (optional) -->
-        <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+       <!-- <div class="user-panel mt-3 pb-3 mb-3 d-flex">
             <div class="image">
                 <img src="{{ asset('admin/dist/img/user2-160x160.jpg') }}" class="img-circle elevation-2"
                     alt="User Image">
@@ -17,10 +17,10 @@
             <div class="info">
                 <a href="#" class="d-block">Admin</a>
             </div>
-        </div>
+        </div>-->
 
         <!-- SidebarSearch Form -->
-        <div class="form-inline">
+        <!--<div class="form-inline">
             <div class="input-group" data-widget="sidebar-search">
                 <input class="form-control form-control-sidebar" type="search" placeholder="Search" aria-label="Search">
                 <div class="input-group-append">
@@ -29,7 +29,7 @@
                     </button>
                 </div>
             </div>
-        </div>
+        </div>-->
 
         <!-- Sidebar Menu -->
         <nav class="mt-2">
@@ -66,7 +66,7 @@
                     <a href="{{route('staffleaves')}}" class="nav-link">
                         <i class="nav-icon fa fa-list-alt"></i>
                         <p>
-                            leave History
+                            Leaves History
                             <i class="right fas fa-angle-right"></i>
                         </p>
                     </a>
@@ -103,7 +103,7 @@
                     </form>
                 </li>
                 <li class="nav-item">
-                    <a href="#" class="nav-link">
+                    <a href="{{route('change-password')}}" class="nav-link">
                         <i class="nav-icon fa fa-cog"></i>
                         <p>
                             Setup

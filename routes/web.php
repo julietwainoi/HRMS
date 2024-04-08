@@ -66,3 +66,5 @@ Route::get('/leavesCode', [LeaveCodesController::class,'store'])->name('leavesCo
 //adding the dropdown  type of leave to leave assignment form & leave application form from the leavecode table
 Route::get('/LeaveDetail', [LeaveDetailController::class,'showLeaveDescriptions'])->name('LeaveDetail');
 Route::get('/leave', [LeaveController::class,'showLeaveDescriptions'])->name('leave');
+Route::post('/change-password', [UserController::class, 'changePassword'])->name('change.password');
+Route::get('/change-password', [UserController::class, 'index'])->name('change-password');

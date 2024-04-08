@@ -8,8 +8,8 @@
             </div><!-- /.col -->
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
-                    <li class="breadcrumb-item"><a href="#">Home</a></li>
-                    <li class="breadcrumb-item active">Dashboard v1</li>
+                    <li class="breadcrumb-item"><a href="{{route('home')}}">Home</a></li>
+                    <li class="breadcrumb-item active"><a href="{{route('dashboard')}}">Dashboard</a> </li>
                 </ol>
             </div><!-- /.col -->
         </div><!-- /.row -->
@@ -26,29 +26,29 @@
             <div class="col-lg-4 col-md-6">
                 <!-- small box -->
                 @if ($leaveDetail->LeaveCode === 'L-001')
-                    <div class="small-box bg-info">
+                    <div class="small-box bg-primary">
                 @elseif ($leaveDetail->LeaveCode === 'L-002')
-                    <div class="small-box bg-success">
+                    <div class="small-box bg-danger">
                 @elseif ($leaveDetail->LeaveCode === 'L-003')
                     <div class="small-box bg-warning">
                 @elseif ($leaveDetail->LeaveCode === 'L-004')
-                    <div class="small-box bg-warning">
+                    <div class="small-box  btn-secondary">
                 @elseif ($leaveDetail->LeaveCode === 'L-005')
                     <div class="small-box bg-success">
                 @elseif ($leaveDetail->LeaveCode === 'L-006')
-                    <div class="small-box bg-warning">
+                    <div class="small-box bg-primary">
                 @elseif ($leaveDetail->LeaveCode === 'L-007')
                     <div class="small-box bg-info">
                 @elseif ($leaveDetail->LeaveCode === 'L-008')
-                    <div class="small-box bg-success">
+                    <div class="small-box bg-dark">
                 @elseif ($leaveDetail->LeaveCode === 'L-009')
-                    <div class="small-box bg-warning">
+                    <div class="small-box bg-olive">
                 @endif
                     <div class="inner">
                         <div class="leave-detail leave-type-{{ substr($leaveDetail->LeaveCode, -1) }}">
                             <!-- Display leave details -->
-                            <p>Leave Code: {{ $leaveDetail->LeaveCode }}</p>
-                            <p>Leave Description: {{ $leaveDetail->LeaveDesc }}</p>
+                            <!--<p>Leave Code: {{ $leaveDetail->LeaveCode }}</p>-->
+                           <h5> {{ $leaveDetail->LeaveDesc }}</h5>
                             <p>Leave Days: {{ $leaveDetail->LeaveDays }}</p>
                             <p>Remaining Days: {{ $leaveDetail->RemainingDays }}</p>
                         </div>
@@ -56,7 +56,7 @@
                     <div class="icon">
                         <i class="ion ion-bag"></i>
                     </div>
-                    <a href="{{ route('leave') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                    <a href="{{ route('leave') }}" class="small-box-footer">Apply Leave <i class="fas fa-arrow-circle-right"></i></a>
                 </div>
             </div>
             @php $count++; @endphp
