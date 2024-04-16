@@ -11,6 +11,10 @@ use App\Models\User;
 class Leave extends Model
 {
     use HasFactory, Notifiable;
+    public function Department()
+    {
+        return $this->belongsTo(Department::class);
+    }
 
     public function user()
     {

@@ -20,16 +20,16 @@ class LeaveCodesController extends Controller
         {
             // Validate the incoming request data
             $request->validate([
-                'leave_code' => 'required|string',
-                'leave_desc' => 'nullable|string',
-                'leave_days' => 'required|numeric',
+                'LeaveCode' => 'required|string',
+                'LeaveDesc' => 'nullable|string',
+                'LeaveDays' => 'required|numeric',
             ]);
     
             // Create a new LeaveCodes instance and fill it with the submitted data
             $leaveCode = new LeaveCodes();
-            $leaveCode->LeaveCode = $request->leave_code;
-            $leaveCode->LeaveDesc = $request->leave_desc;
-            $leaveCode->LeaveDays = $request->leave_days;
+            $leaveCode->LeaveCode = $request->LeaveCode;
+            $leaveCode->LeaveDesc = $request->LeaveDesc;
+            $leaveCode->LeaveDays = $request->LeaveDays;
     
             // Save the leave code data to the database
             $leaveCode->save();

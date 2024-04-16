@@ -7,27 +7,29 @@ use Illuminate\Http\Request;
 
 class RoleController extends Controller
 {
-    public function RoleInstances()
-    {
-        // Create or retrieve admin role
-        $adminRole = Role::firstOrCreate(
-            ['name' => 'admin'],
-            ['description' => 'Administrator role with full access']
-        );
-    
-        // Create or retrieve user role
-        $userRole = Role::firstOrCreate(
-            ['name' => 'user'],
-            ['description' => 'Regular user role with basic access']
-        );
-    
-        // Create or retrieve manager role
-        $managerRole = Role::firstOrCreate(
-            ['name' => 'manager'],
-            ['description' => 'Manager role with intermediate access']
-        );
-    
-       
+    public function index(){
+
+        Return view('roles');
     }
-    
+   
+public function store(Request $request)
+{
+    $validatedData = $request->validate([
+        'name' => 'required|string|unique:roles,name',
+        'description' => 'required|string',
+    ]);
+
+    // Create or retrieve the role
+    $role = Role::firstOrCreate(
+        ['name' => $validatedData['name']],
+        ['description' => $validatedData['description']]
+    );
+
+    return redirect('/roles')->with('success', 'role assigned successfully.');
 }
+}
+
+       
+    
+   
+    

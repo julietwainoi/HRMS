@@ -9,6 +9,7 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use App\Models\leave;
 use App\Models\Role;
+use App\Models\LeaveDetail;
 class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
@@ -17,20 +18,40 @@ class User extends Authenticatable
     {
         return $this->hasMany(Leave::class,'staff_id', 'IDNo');
     }
-    public function hasRole($role)
+    public function leaveDetails()
     {
-        return $this->roles()->where('name', $role)->exists();
+    return $this->hasMany(LeaveDetail::class, 'EmployeeID', 'IDNo');
     }
     
     public function roles()
     {
         return $this->belongsToMany(Role::class);
+    } 
+    
+    
+    public function hasRole($role)
+    {
+        return $this->roles()->where('name', $role)->exists();
+    }
+    
+    public function hasAnyRole($roles)
+    {
+        return $this->roles()->whereIn('name', $roles)->exists();
+    }
+
+   
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::deleting(function ($user) {
+            // Delete the user's roles when the user is deleted
+            $user->roles()->detach();
+        });
     }
     // Define the relationship with LeaveDetail
-public function leaveDetails()
-{
-    return $this->hasMany(LeaveDetail::class, 'EmployeeID', 'IDNo');
-}
+
 
     /**
      * The attributes that are mass assignable.

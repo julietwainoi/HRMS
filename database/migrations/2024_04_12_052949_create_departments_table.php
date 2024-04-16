@@ -13,13 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('LeaveDetail', function (Blueprint $table) {
+        Schema::create('departments', function (Blueprint $table) {
             $table->id();
-            $table->string('EmployeeID')->nullable(false);
-            $table->string('LeaveCode')->nullable(false);
-            $table->string('LeaveDesc')->nullable(false);
-            $table->string('LeaveDays')->nullable(false);
-             $table->string('RemainingDays')->nullable(false);
+            $table->string('department_name')->nullable(false)->unique();
+            $table->string('department_code')->nullable(false);
+            $table->string('department_description')->nullable(false);
             $table->timestamps();
         });
     }
@@ -31,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('LeaveDetail');
+        Schema::dropIfExists('departments');
     }
 };

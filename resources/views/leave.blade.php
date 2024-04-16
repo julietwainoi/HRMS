@@ -12,12 +12,8 @@
           {{ session('success') }}
       </div>
       @endif
-      @if(session('error'))
-      <div class="alert alert-danger">
-          {{ session('error') }}
-      </div>
-      @endif
-</div style="margin-left:250px;"> @if(session('error'))
+     
+   </div style="margin-left:250px;"> @if(session('error'))
         <div class="alert alert-danger">
             {{ session('error') }}
         </div>

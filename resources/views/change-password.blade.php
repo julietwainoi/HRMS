@@ -40,5 +40,7 @@
 
     <button type="button" class="btn btn-primary">Change Password</button>
 </form>
-        </section>
+</section>
+    </div>
+</div>
 @endsection

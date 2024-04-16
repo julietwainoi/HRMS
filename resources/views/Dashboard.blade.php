@@ -32,17 +32,17 @@
                 @elseif ($leaveDetail->LeaveCode === 'L-003')
                     <div class="small-box bg-warning">
                 @elseif ($leaveDetail->LeaveCode === 'L-004')
-                    <div class="small-box  btn-secondary">
+                    <div class="small-box  bg-danger">
                 @elseif ($leaveDetail->LeaveCode === 'L-005')
-                    <div class="small-box bg-success">
+                    <div class="small-box bg-warning">
                 @elseif ($leaveDetail->LeaveCode === 'L-006')
                     <div class="small-box bg-primary">
                 @elseif ($leaveDetail->LeaveCode === 'L-007')
-                    <div class="small-box bg-info">
+                    <div class="small-box bg-primary">
                 @elseif ($leaveDetail->LeaveCode === 'L-008')
-                    <div class="small-box bg-dark">
+                    <div class="small-box bg-danger">
                 @elseif ($leaveDetail->LeaveCode === 'L-009')
-                    <div class="small-box bg-olive">
+                    <div class="small-box bg-warning">
                 @endif
                     <div class="inner">
                         <div class="leave-detail leave-type-{{ substr($leaveDetail->LeaveCode, -1) }}">

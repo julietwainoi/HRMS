@@ -4,6 +4,9 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth; 
+use App\Models\User;
+
 
 class CheckUserRole
 {
@@ -14,21 +17,14 @@ class CheckUserRole
      * @param  \Closure(\Illuminate\Http\Request): (\Illuminate\Http\Response|\Illuminate\Http\RedirectResponse)  $next
      * @return \Illuminate\Http\Response|\Illuminate\Http\RedirectResponse
      */
-    public function handle($request, Closure $next)
+    public function handle($request, Closure $next, ...$roles)
     {
-        // Check if the user is authenticated
-        if (!$request->user()) {
-            // Handle unauthenticated users
-            return redirect()->route('login');
+        if (Auth::check() && Auth::user()->hasAnyRole($roles)) 
+        {
+            return $next($request);
         }
-    
-        // Check if the user has the "admin" role
-        if (!$request->user()->roles()->where('name', 'admin')->exists()) {
-            // Redirect the user to an "unauthorized" page or route
-            return redirect()->route('unauthorized');
-        }
-    
-        // User has the "admin" role, proceed with the request
-        return $next($request);
+
+        abort(403, 'Unauthorized');
     }
+
 }
