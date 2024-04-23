@@ -11,6 +11,7 @@ use App\Models\User;
 class Leave extends Model
 {
     use HasFactory, Notifiable;
+    
     public function Department()
     {
         return $this->belongsTo(Department::class);
@@ -25,6 +26,7 @@ class Leave extends Model
     protected $fillable = [
         'staff_id',
         'type_of_leave',
+        'department_name',
         'description',
         'date_of_leave',
         'end_of_leave',
@@ -46,7 +48,10 @@ class Leave extends Model
     {
         return $this->belongsTo(LeaveCodes::class);
     }
-    
+    public function departments()
+{
+    return $this->belongsTo(Leave::class);
+}
   
 
 }

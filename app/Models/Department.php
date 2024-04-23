@@ -13,6 +13,14 @@ class Department extends Model
     {
         return $this->hasMany(Leave::class);
     }
+
+    public function leaves()
+    {
+        return $this->belongsToMany(Leave::class);
+    } 
+    
+
+
     protected $fillable = [
         'department_name',
         'department_code',

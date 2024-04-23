@@ -35,8 +35,10 @@
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                 <!-- Add icons to the links using the .nav-icon class with font-awesome or any other icon font library -->
+                
+    
                 <li class="nav-item">
-                  <a href="{{route('staffDashboard')}}" class="nav-link">
+                  <a href="{{route('dashboard-view')}}" class="nav-link">
                       <i class="nav-icon fas fa-tachometer-alt"></i>
                       <p>
                          Dashboard
@@ -44,6 +46,7 @@
                       </p>
                   </a>
               </li>
+            
                 <li class="nav-item">
                     <a href="{{route('admin.pendingRequests')}}" class="nav-link">
                       <i class="nav-icon fa fa-list-alt"></i>
@@ -71,15 +74,17 @@
                         </p>
                     </a>
                 </li>
-                <li class="nav-item">
-                    <a href="{{route('LeaveDetail')}}" class="nav-link">
-                        <i class="nav-icon fa fa-window-restore"></i>
-                        <p>
-                            Leave Assignment 
-                            <i class="right fas fa-angle-right"></i>
-                        </p>
-                    </a>
-                </li>
+        @if(auth()->user()->hasRole('manager'))
+        <li class="nav-item">
+            <a href="{{route('LeaveDetail')}}" class="nav-link">
+                <i class="nav-icon fa fa-window-restore"></i>
+                <p>
+                    Leave Assignment 
+                    <i class="right fas fa-angle-right"></i>
+                </p>
+            </a>
+        </li>
+        @endif
                 <li class="nav-item">
                     <a href="{{route('register')}}" class="nav-link">
                         <i class="nav-icon fa fa-envelope-open"></i>
@@ -127,6 +132,15 @@
                       </p>
                   </a>
               </li>
+              <li class="nav-item">
+                <a href="{{route('Supervisor')}}" class="nav-link">
+                    <i class="nav-icon fa fa-cog"></i>
+                    <p>
+                     supervisorDshboard
+                        <i class="right fas fa-angle-right"></i>
+                    </p>
+                </a>
+            </li>
               
               <li class="nav-item">
                 <a href="#" class="nav-link"

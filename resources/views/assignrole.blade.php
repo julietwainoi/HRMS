@@ -27,10 +27,10 @@
     <input type="text" id="IDNo" name="IDNo" class="form-control"  required=""><br>
     </div>
     <div class="form group">
-    <label for="roleId">Role ID:</label><br>
-    <input type="text" id="roleId" name="roleId" class="form-control"  required=""><br>
-    </div><br>
-    <button type="button" class="btn btn-primary">Assign Role</button>
+    <label for="role_id">Role ID:</label><br>
+    <input type="text" id="role_id" name="role_id" class="form-control"  required=""><br>
+    </div>
+    <button type="submit">Assign  Role</button>
 </form>
 
 </section>

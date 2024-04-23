@@ -14,36 +14,26 @@ class RoleuserController extends Controller
    
     public function assignRole(Request $request)
     {
-        $validatedData = $request->validate([
-            'IDNo' => 'required|string',
-            'roleId' => 'required|numeric',
+        // Validate the request data
+        $request->validate([
+            'IDNo' => 'required|exists:users,IDNo',
+            'role_id' => 'required|exists:roles,id',
         ]);
     
+        // Retrieve the user based on the IDNo
+        $user = User::where('IDNo', $request->IDNo)->first();
     
-        $user = User::where('IDNo', $validatedData['IDNo'])->first();
+        // Retrieve the role based on the role_id provided in the request
+        $role = Role::findOrFail($request->role_id);
     
-      
-        if (!$user) {
-            return back()->with('error', 'User not found');
+        // Assign the role to the user
+        if ($user) {
+            // Sync the user's roles, which will update the pivot table
+            $user->roles()->sync([$role->id]);
+    
+            return redirect()->back()->with('success', 'Role assigned successfully');
+        } else {
+            return redirect()->back()->with('error', 'User not found');
         }
-    
-        
-        $userId = $user->id;
-    
-      
-        $role = Role::find($validatedData['roleId']);
-    
-     
-        if (!$role) {
-            return back()->with('error', 'Role not found');
-        }
-    
-    
-        $user->roles()->syncWithoutDetaching($role);
-    
-   
-        return redirect('assignrole')->with('success', 'Role assigned successfully.');
-    }
-
-   
+}
 }

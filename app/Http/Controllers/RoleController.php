@@ -9,7 +9,7 @@ class RoleController extends Controller
 {
     public function index(){
 
-        Return view('roles');
+        Return view('role');
     }
    
 public function store(Request $request)

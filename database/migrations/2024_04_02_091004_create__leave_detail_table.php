@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('LeaveDetail', function (Blueprint $table) {
             $table->id();
             $table->string('EmployeeID')->nullable(false);
-            $table->string('LeaveCode')->nullable(false);
+            $table->string('LeaveCode')->nullable(false)->unique();
             $table->string('LeaveDesc')->nullable(false);
             $table->string('LeaveDays')->nullable(false);
              $table->string('RemainingDays')->nullable(false);

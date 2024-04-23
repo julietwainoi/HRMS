@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Log;
 use App\Models\LeaveDetail;
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Department;
 use Illuminate\Support\Facades\Auth;
 
 class LeaveController extends Controller
@@ -27,6 +28,7 @@ public function InsertLeaveData(Request $request)
         $validatedData = $request->validate([
             'staff_id' => 'required|string',
             'type_of_leave' => 'required|string',
+            'department_name'=>'required|string',
             'description' => 'required|string',
             'date_of_leave' => 'required|date',
             'end_of_leave' => 'required|date|after_or_equal:date_of_leave',
@@ -50,6 +52,7 @@ public function InsertLeaveData(Request $request)
                 $leave = new Leave();
                 $leave->staff_id = $validatedData['staff_id'];
                 $leave->type_of_leave = $validatedData['type_of_leave'];
+                $leave->department_name = $validatedData['department_name'];
                 $leave->description = $validatedData['description'];
                 $leave->date_of_leave = $validatedData['date_of_leave'];
                 $leave->end_of_leave = $validatedData['end_of_leave'];
@@ -76,15 +79,21 @@ public function InsertLeaveData(Request $request)
 
 public function adminpendingRequests()
 {
-    // Fetch pending leave requests from the database
+    $IDNo = auth()->user()->IDNo;
+    
+    // Retrieve leave details associated with the current user
+    $leaveDetails =LeaveDetail::where('EmployeeID', $IDNo)->get();
+    
+
     $leave_pending_data = Leave::where('approval_status', 'Pending')->get();
 
     // Pass the data to the view
-    return view('pending-request', ['leave_pending_data' => $leave_pending_data]);
+    return view('pending-request',compact('leaveDetails', 
+'leave_pending_data'));
 }
 
 
-public function pendingRequestsleave()
+public function Requestsleave()
 {
     // Get the currently authenticated user
     $user = Auth::user();
@@ -166,21 +175,55 @@ public function rejectRequest($id)
             return redirect()->back()->with('error', 'Unauthorized access.');
         }
 }
-public function showLeaveDescriptions()
+public function showLeaveData()
 {
     try {
-        // Retrieve all leave descriptions from the database
         $leaveDescriptions = LeaveCodes::pluck('LeaveDesc');
-
-        // Dump the leaveDescriptions variable
-        //dd($leaveDescriptions);
-
-        // Pass the leave descriptions to the view
-        return view('leave', ['leaveDescriptions' => $leaveDescriptions]);
+        $departmentNames = Department::pluck('department_name');
+        
+        return view('leave', compact('leaveDescriptions', 'departmentNames'));
     } catch (\Exception $e) {
-        // Handle any exceptions, maybe log them, and return an error response
-        return back()->withError('Failed to retrieve leave descriptions. Please try again later.');
+        return back()->withError('Failed to retrieve data. Please try again later.');
     }
 }
+public function deleteLeaveData($leaveId)
+{
+    
+        // Find the leave record by its ID
+        $leave = Leave::findOrFail($leaveId);
 
+        // Check if the leave is pending
+        if ($leave->approval_status === 'Pending') {
+            // Delete the leave record
+            $leave->delete();
+            return response()->json(['message' => 'Leave data deleted successfully']);
+        } else {
+            // Return an error if the leave is not pending
+            return response()->json(['error' => 'Leave is not pending and cannot be deleted'], 403);
+        }
+   
 }
+ public function getPendingLeavesInDepartment1()
+ {
+    $user = auth()->user();
+    $leaveDetails =  $user->leaveDetails()->get(); 
+    $all_leave_data = Leave::where('staff_id', $user->IDNo)
+                            ->where('approval_status', 'Pending')
+                            ->latest() 
+                            ->get();
+    $pendingLeaves = Leave::where('department_name', 'department 1')
+                          ->where('approval_status', 'pending')
+                          ->get();
+
+
+    return view('Supervisor', [
+        'leaveDetails' => $leaveDetails,
+        'all_leave_data' => $all_leave_data,
+        'pendingLeaves'  =>$pendingLeaves
+        
+                            ]); //
+    
+ }
+
+
+} 

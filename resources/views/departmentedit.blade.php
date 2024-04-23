@@ -21,11 +21,11 @@
             @method('PUT')
             <div class="form-group">
                 <label for="department_name">Department Name:</label>
-                <input type="text" name="department_name" id="department_name" class="form-control" required>
+                <input type="text" name="department_name" id="department_name" class="form-control" placeholder="<?php echo $department->department_name; ?>"  required>
             </div>
             <div class="form-group">
                 <label for="department_code">Department Code:</label>
-                <input type="text" name="department_code" id="department_code" class="form-control" required>
+                <input type="text" name="department_code" id="department_code" class="form-control" placeholder="<?php echo $department->department_code; ?>"required>
             </div>
             <div class="form-group">
                 <label for="department_description">Department Description:</label>

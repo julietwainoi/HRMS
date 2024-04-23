@@ -37,10 +37,10 @@ class RegisterController extends Controller
      *
      * @return void
      */
-    public function __construct()
-    {
-        $this->middleware(checkUserRole::class . ':admin,manager');
-    }
+   // public function __construct()
+   // {
+     //   $this->middleware(checkUserRole::class . ':admin,manager');
+    //}
 
     /**
      * Get a validator for an incoming registration request.

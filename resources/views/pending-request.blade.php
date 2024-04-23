@@ -1,13 +1,47 @@
 @extends('layouts.master')
 @section('content')
 
+
+
+
+   <div class="card" >
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row"style="margin-top: 10px">
+                @foreach ($leaveDetails as $leaveDetail)
+                    @if ($leaveDetail->LeaveCode === 'L-010')
+                        <div class="col-lg-4 col-md-6" style="text-align:center;margin-top: 10px">
+                            <!-- small box -->
+                            <div class="small-box ">
+                                <div class="inner">
+                                    <div class="leave-detail leave-type-{{ substr($leaveDetail->LeaveCode, -1) }}">
+                                        <!-- Display leave details -->
+                                        <h5>{{ $leaveDetail->LeaveDesc }}</h5>
+                                       
+                                        <p>Remaining Days: {{ $leaveDetail->RemainingDays }}</p>
+                                    </div>
+                                </div>
+                                <div class="icon">
+                                    <i class="ion ion-bag"></i>
+                                </div>
+                                <a href="{{ route('leave') }}" class="small-box-footer ">Apply Leave <i class="fas fa-arrow-circle-right"></i></a>
+                            </div>
+                        </div>
+                    @endif
+                @endforeach
+            </div>
+        </div>
+    </section>
+    </div>
+
+
 <div class="card">
     <div class="card-body col-sm-12">
-        <h3 class="panel-title" style="text-align:center;">Pending Requests</h3>
+        <h3 class="panel-title">Pending Requests</h3>
         <br>
         <div class="table-responsive">
             <table class="table table-bordered">
-                <thead class="bg-dark text-white">
+                <thead class=" text-dark">
                     <tr>
                         <th>Date of Leave</th>
                         <th>End of Leave</th> <!-- Added this column -->
@@ -38,5 +72,5 @@
         </div>
     </div>
 </div>
-
+ 
 @endsection

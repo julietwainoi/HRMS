@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Models\LeaveDetail;
 use Illuminate\Http\Request;
 use App\Models\LeaveCodes;
+use Carbon\Carbon;
 class LeaveDetailController extends Controller
 {
     public function __construct()
@@ -33,6 +34,16 @@ class LeaveDetailController extends Controller
             'RemainingDays' => 'required|numeric',
            
         ]);
+        $currentYear = Carbon::now()->year;
+        $existingAssignment = LeaveDetail::where('EmployeeID', $validatedData['EmployeeID'])
+                                          ->where('LeaveDesc', $validatedData['LeaveDesc'])
+                                          ->whereYear('created_at', $currentYear)
+                                          ->exists();
+
+        // If the user has already been assigned this leave type for the current year, return an error
+        if ($existingAssignment) {
+            return redirect()->back()->with('error', 'User has already been assigned this leave type for this year.');
+        }
 
         // Create a new Leave instance with the validated data
         $leave = new LeaveDetail;

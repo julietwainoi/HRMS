@@ -33,12 +33,12 @@ Auth::routes();
 //leave application form
 Route::get('/leave',[App\Http\Controllers\LeaveController::class, 'index'])->name('leave');
 Route::post('/leave-form',[App\Http\Controllers\LeaveController::class, 'insertLeaveData']);
-Route::get('/staffleaves', [App\Http\Controllers\LeaveController::class, 'pendingRequestsleave'])->name('staffleaves');
+
+Route::get('/staffleaves', [App\Http\Controllers\LeaveController::class, 'Requestsleave'])->name('staffleaves');
 
 //pending request for admin
-Route::get('/pending-request', [App\Http\Controllers\LeaveController::class, 'adminpendingRequests'])
-    ->middleware(checkUserRole::class . ':admin,manager')
-    ->name('admin.pendingRequests');
+Route::get('/pending-request', [App\Http\Controllers\staffDashboardController::class, 'adminpendingRequests'])
+ ->name('admin.pendingRequests');
 
 
 
@@ -52,14 +52,14 @@ Route::post('/roles.store', [RoleController::class, 'store'])->name('roles.store
 Route::get('/roles', [RoleController::class, 'index'])->name('roles');
 //assignRoles
 Route::post('/assign.role',[RoleuserController::class, 'assignRole'])->name('assign.role');
-Route::get('/assignrole', [RoleuserController::class, 'index'])->name('assignrole')->middleware(checkUserRole::class . ':admin,manager'); 
+Route::get('/assignrole', [RoleuserController::class, 'index'])->name('assignrole'); 
 
 
 
 
 //admin reject or accept leave
-Route::get('/accept-request/{id}', [LeaveController::class, 'acceptRequest'])->middleware(checkUserRole::class . ':admin,manager');
-Route::get('/reject-request/{id}', [LeaveController::class, 'rejectRequest'])->middleware(checkUserRole::class . ':admin,manager');
+Route::get('/accept-request/{id}', [LeaveController::class, 'acceptRequest']);
+Route::get('/reject-request/{id}', [LeaveController::class, 'rejectRequest']);
 //unauthorized  route
 Route::get('/unauthorized', function () { return 'Unauthorized access!';})->name('unauthorized');
 
@@ -74,14 +74,25 @@ Route::get('/dashboard', [LeaveDetailController::class, 'showLeaveDetails'])->na
 //Route::get('/LeavesCode', [LeaveCodesController::class,'store'])->name('leavesCode');
 //adding the dropdown  type of leave to leave assignment form & leave application form from the leavecode table
 Route::get('/LeaveDetail', [LeaveDetailController::class,'showLeaveDescriptions'])->name('LeaveDetail');
-Route::get('/leave', [LeaveController::class,'showLeaveDescriptions'])->name('leave');
+
+Route::get('/leave', [LeaveController::class, 'showLeaveData'])->name('leave');
+Route::delete('leave_delete/{data}', [LeaveController::class, 'deleteLeaveData'])->name('leave_delete');
+
+
+//
 Route::post('/change-password', [UserController::class, 'changePassword'])->name('change.password');
 Route::get('/change-password', [UserController::class, 'index'])->name('change-password');
+//
 Route::get('/staffDashboard', [staffDashboardController::class, 'showStaffDashboard'])->name('staffDashboard');
+Route::get('/Supervisor', [staffDashboardController::class, 'getPendingLeavesInDepartment1'])->name('Supervisor');
 //department route
 Route::get('/department', [DepartmentController::class, 'index'])->name('department');
 Route::post('/departments.store', [DepartmentController::class, 'store'])->name('departments.store');
-Route::get('/department/{id}/edit', [DepartmentController::class, 'edit'])->name('departments.edit');
+Route::get('/department/{department}/edit', [DepartmentController::class, 'edit'])->name('departments.edit');
 
 Route::put('/department/{department}', [DepartmentController::class, 'update'])->name('departments.update');
 Route::delete('/department/{department}', [DepartmentController::class, 'destroy'])->name('departments.destroy');
+
+// Replace YourController with the actual controller name
+
+Route::get('/dashboard-view', [staffDashboardController::class, 'DashboardView'])->name('dashboard-view');

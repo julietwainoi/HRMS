@@ -58,12 +58,6 @@
                     </div>
                     <a href="{{ route('leave') }}" class="small-box-footer">Apply Leave <i class="fas fa-arrow-circle-right"></i></a>
                 </div>
-            </div>
-            @php $count++; @endphp
-            @if ($count % 3 == 0)
-                </div>
-            @endif
-        @endforeach
-    </div>
+         
 </section>
 @endsection

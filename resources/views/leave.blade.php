@@ -38,7 +38,20 @@
           </select>
       </div>
   </div>
-  <div class="form group">
+  
+  <div class="form-group">
+    <label for="department" class="col-sm-2 col-form-label">department</label>
+    <div class="col-sm-12">
+        <select class="form-control" name="department_name" id="department_name" aria-label="Default select example" required>
+            <option selected disabled>Select department</option>
+            @foreach($departmentNames as $departmentName)
+           <option value="{{ $departmentName }}">{{ $departmentName }}</option>
+           @endforeach
+        </select>
+        </div>
+      </div>
+  
+            <div class="form group">
   <label for="description">Add Reason: </label>
   <textarea  id="description" name="description" class="form-control" required=""></textarea>
 </div>
