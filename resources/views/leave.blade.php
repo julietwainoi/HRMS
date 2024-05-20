@@ -22,10 +22,15 @@
   
         <form name="leave" id="leave" method="post" action="{{url('/leave-form')}}">
            @csrf
-      <div class="form group">
+    <div class="form group">
     <label for="staff_id">STAFF ID </label>
     <input type="text" id="staff_id" name="staff_id" class="form-control" required="">
     </div><br>
+    
+    <div class="form group">
+        <label for="Name">STAFF NAME </label>
+        <input type="text" id="Name" name="Name" class="form-control" required="">
+        </div><br>
    
     <div class="form-group">
       <label for="type_of_leave" class="col-sm-2 col-form-label">Type of Leave</label>

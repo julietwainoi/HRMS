@@ -27,6 +27,7 @@ public function InsertLeaveData(Request $request)
         // Validate the incoming request data
         $validatedData = $request->validate([
             'staff_id' => 'required|string',
+            'Name' => 'required|string',
             'type_of_leave' => 'required|string',
             'department_name'=>'required|string',
             'description' => 'required|string',
@@ -51,6 +52,7 @@ public function InsertLeaveData(Request $request)
                 // Create a new leave record
                 $leave = new Leave();
                 $leave->staff_id = $validatedData['staff_id'];
+                $leave->Name = $validatedData['Name'];
                 $leave->type_of_leave = $validatedData['type_of_leave'];
                 $leave->department_name = $validatedData['department_name'];
                 $leave->description = $validatedData['description'];
@@ -112,7 +114,7 @@ public function acceptRequest($id)
         $user = auth()->user();
     
         // Check if the user has the "admin" role
-        if ($user->hasRole('admin')) {
+        if ($user->hasRole('admin') || $user->hasRole('Supervisor 1')|| $user->hasRole('manager'))  {
             // Find the leave by its ID
             $leave = Leave::find($id);
     
@@ -156,7 +158,7 @@ public function rejectRequest($id)
         $user = auth()->user();
 
         // Check if the user has the "admin" role
-        if ($user->hasRole('admin')) {
+        if ($user->hasRole('admin') || $user->hasRole('Supervisor 1')) {
             // Find the leave by its ID
             $leave = Leave::find($id);
 

@@ -33,7 +33,7 @@
         </div>
     </section>
     </div>
-
+    <div style="background-color: lightgreen; height: 50px;"></div>
 
 <div class="card">
     <div class="card-body col-sm-12">
@@ -45,7 +45,7 @@
                     <tr>
                         <th>Date of Leave</th>
                         <th>End of Leave</th> <!-- Added this column -->
-                        <th>Request Sent On</th>
+                        <th>Staff Name</th>
                         <th>Leave Type</th>
                         <th>Staff ID Number</th>
                         <th>Reason For Leave</th>
@@ -57,7 +57,7 @@
                     <tr>
                         <td>{{ $data->date_of_leave }}</td>
                         <td>{{ $data->end_of_leave }}</td> <!-- Added data for end_of_leave -->
-                        <td>{{ $data->created_at }}</td>
+                        <td>{{ $data->Name }}</td>
                         <td>{{ $data->type_of_leave }}</td>
                         <td>{{ $data->staff_id }}</td>
                         <td>{{ $data->description }}</td>

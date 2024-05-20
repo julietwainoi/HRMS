@@ -43,7 +43,7 @@ Route::get('/pending-request', [App\Http\Controllers\staffDashboardController::c
 
 
 //home page
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', [App\Http\Controllers\staffDashboardController::class, 'DashboardView'])->name('home');
 //user profile
 Route::get('/profile', [App\Http\Controllers\ProfileController::class, 'CurrentProfile'])->name('profile');
 
@@ -58,8 +58,8 @@ Route::get('/assignrole', [RoleuserController::class, 'index'])->name('assignrol
 
 
 //admin reject or accept leave
-Route::get('/accept-request/{id}', [LeaveController::class, 'acceptRequest']);
-Route::get('/reject-request/{id}', [LeaveController::class, 'rejectRequest']);
+Route::get('/accept-request/{id}', [LeaveController::class, 'acceptRequest'])->name('accept-request');
+Route::get('/reject-request/{id}', [LeaveController::class, 'rejectRequest'])->name('reject-request');
 //unauthorized  route
 Route::get('/unauthorized', function () { return 'Unauthorized access!';})->name('unauthorized');
 

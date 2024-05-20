@@ -41,7 +41,7 @@
                         @endforeach
                     </div>
                 </div>
-                
+            <div style="background-color: lightgreen; height: 50px;"></div>  
         </div><br>
         <div class="card-body" style="margin-left: 0;">
             <h3 class="panel-title" > Pending Requests</h3>
@@ -52,7 +52,7 @@
                         <tr>
                             <th>Date of Leave</th>
                             <th>End of Leave</th>
-                            <th>Request Sent On</th>
+                            <th>Staff Name</th>
                             <th>Leave Type</th>
                             <th>Staff ID Number</th>
                             <th>Reason For Leave</th>
@@ -83,7 +83,7 @@
                         <tr > 
                             <td>{{ $data->date_of_leave }}</td>
                             <td>{{ $data->end_of_leave }}</td>
-                            <td>{{ $data->date_of_request }}</td>
+                            <td>{{ $data->Name }}</td>
                             <td>{{ $data->type_of_leave }}</td>
                             <td>{{ $data->staff_id }}</td>
                             <td>{{ $data->description }}</td>

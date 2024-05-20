@@ -3,15 +3,15 @@
 <div class="card ">
    
     <div class="card-body" style="margin-left: 0;">
-        <h3 class="panel-title" style="text-align:center;">Requests History</h3>
+        <h3 class="panel-title" >Requests History</h3>
         <br>
         <div class="table-responsive">
             <table class="table table-bordered">
-                <thead class="bg-dark text-white">
+                <thead class="text-dark">
                     <tr>
                         <th>Date of Leave</th>
                         <th>End of Leave</th>
-                        <th>Request Sent On</th>
+                        <th>Staff Name</th>
                         <th>Leave Type</th>
                         <th>Staff ID Number</th>
                         <th>Reason For Leave</th>
@@ -42,11 +42,11 @@
                     <tr > 
                         <td>{{ $data->date_of_leave }}</td>
                         <td>{{ $data->end_of_leave }}</td>
-                        <td>{{ $data->date_of_request }}</td>
+                        <td>{{ $data->Name }}</td>
                         <td>{{ $data->type_of_leave }}</td>
                         <td>{{ $data->staff_id }}</td>
                         <td>{{ $data->description }}</td>
-                        <td class="{{ $cardColor }}">{{ $data->approval_status }}</td>
+                        <td >{{ $data->approval_status }}</td>
                         <td>
                             <a href="/delete-leave-pending-request-in-staff-account/{{ $data->auto_id }}" class="btn btn-danger confirmation">Delete Request</a>
                         </td>

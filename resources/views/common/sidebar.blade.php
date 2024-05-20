@@ -46,7 +46,7 @@
                       </p>
                   </a>
               </li>
-            
+               @if(auth()->user()->hasRole('Supervisor 1'))
                 <li class="nav-item">
                     <a href="{{route('admin.pendingRequests')}}" class="nav-link">
                       <i class="nav-icon fa fa-list-alt"></i>
@@ -56,6 +56,7 @@
                         </p>
                     </a>
                 </li>
+                @endif
                 <li class="nav-item">
                     <a href="{{route('leave')}}" class="nav-link">
                         <i class="nav-icon fas fa-users"></i>
@@ -74,7 +75,7 @@
                         </p>
                     </a>
                 </li>
-        @if(auth()->user()->hasRole('manager'))
+        @if(auth()->user()->hasRole('Supervisor 1'))
         <li class="nav-item">
             <a href="{{route('LeaveDetail')}}" class="nav-link">
                 <i class="nav-icon fa fa-window-restore"></i>
@@ -85,6 +86,7 @@
             </a>
         </li>
         @endif
+            @if(auth()->user()->hasRole('Supervisor 1'))
                 <li class="nav-item">
                     <a href="{{route('register')}}" class="nav-link">
                         <i class="nav-icon fa fa-envelope-open"></i>
@@ -94,6 +96,8 @@
                         </p>
                     </a>
                 </li>
+                @endif
+                @if(auth()->user()->hasRole('Supervisor 1'))
                 <li class="nav-item">
                   <a href="{{route('department')}}" class="nav-link">
                       <i class="nav-icon fa fa-envelope-open"></i>
@@ -103,7 +107,7 @@
                       </p>
                   </a>
               </li>
-              
+              @endif
               
                 <li class="nav-item">
                     <a href="{{route('change-password')}}" class="nav-link">
@@ -114,6 +118,7 @@
                         </p>
                     </a>
                 </li>
+                @if(auth()->user()->hasRole('Supervisor 1'))
                 <li class="nav-item">
                   <a href="{{route('roles')}}" class="nav-link">
                       <i class="nav-icon fa fa-cog"></i>
@@ -123,6 +128,8 @@
                       </p>
                   </a>
               </li>
+              @endif
+              @if(auth()->user()->hasRole('Supervisor 1'))
                 <li class="nav-item">
                   <a href="{{route('assignrole')}}" class="nav-link">
                       <i class="nav-icon fa fa-cog"></i>
@@ -132,6 +139,8 @@
                       </p>
                   </a>
               </li>
+              @endif
+              @if(auth()->user()->hasRole('Supervisor 1'))
               <li class="nav-item">
                 <a href="{{route('Supervisor')}}" class="nav-link">
                     <i class="nav-icon fa fa-cog"></i>
@@ -141,7 +150,7 @@
                     </p>
                 </a>
             </li>
-              
+            @endif
               <li class="nav-item">
                 <a href="#" class="nav-link"
                     onclick="event.preventDefault(); document.getElementById('logout-form').submit();">

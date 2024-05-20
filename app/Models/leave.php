@@ -25,6 +25,7 @@ class Leave extends Model
     
     protected $fillable = [
         'staff_id',
+        'Name',
         'type_of_leave',
         'department_name',
         'description',
