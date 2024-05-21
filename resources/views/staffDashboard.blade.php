@@ -41,7 +41,7 @@
                         @endforeach
                     </div>
                 </div>
-            <div style="background-color: lightgreen; height: 50px;"></div>  
+            <div style="background-color: lightgreen; height: 20px;margin-left:0px;"></div>  
         </div><br>
         <div class="card-body" style="margin-left: 0;">
             <h3 class="panel-title" > Pending Requests</h3>
