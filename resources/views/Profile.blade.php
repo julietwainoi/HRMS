@@ -29,7 +29,7 @@
 
                         <td> "{{ $data->email }}"</td><br>
                             </tr>                      <!-- End of input fields -->
-                        <button type="submit" class="btn btn-primary">Update Profile</button>
+                    <a href="{{ route('profile.edit', $data->StaffNo) }}" ><button type="submit" class="btn btn-primary">Update Profile</button></a>
                     </form>
                 </div><!-- /.col -->
             </div><!-- /.row -->

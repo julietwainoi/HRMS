@@ -1,10 +1,10 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Models\User;
 use Illuminate\Http\Request;
 use App\Models\Role;
-use App\Models\User;
+
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 class UserController extends Controller
@@ -32,4 +32,5 @@ class UserController extends Controller
 
        return redirect()->back()->with('success', 'Password updated successfully.');
     }
+   
 }

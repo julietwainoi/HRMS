@@ -14,6 +14,8 @@ use App\Http\Controllers\staffDashboardController;
 use App\Http\Controllers\RoleuserController;
 use App\Http\Controllers\deprtController;
 use App\Http\Controllers\DepartmentController;
+use App\Http\Controllers\ProfileController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -89,10 +91,11 @@ Route::get('/Supervisor', [staffDashboardController::class, 'getPendingLeavesInD
 Route::get('/department', [DepartmentController::class, 'index'])->name('department');
 Route::post('/departments.store', [DepartmentController::class, 'store'])->name('departments.store');
 Route::get('/department/{department}/edit', [DepartmentController::class, 'edit'])->name('departments.edit');
-
 Route::put('/department/{department}', [DepartmentController::class, 'update'])->name('departments.update');
 Route::delete('/department/{department}', [DepartmentController::class, 'destroy'])->name('departments.destroy');
 
 // Replace YourController with the actual controller name
 
 Route::get('/dashboard-view', [staffDashboardController::class, 'DashboardView'])->name('dashboard-view');
+Route::get('/profile/{user}/edit', [ProfileController::class, 'edit'])->name('profile.edit');
+Route::put('/profile/{user}', [ProfileController::class, 'update'])->name('profile.update');
