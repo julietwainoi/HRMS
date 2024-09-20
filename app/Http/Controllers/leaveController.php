@@ -110,25 +110,25 @@ public function Requestsleave()
     // Check if the user has the "admin" role
 public function acceptRequest($id)
 {
-        // Retrieve the authenticated user
+        
         $user = auth()->user();
     
-        // Check if the user has the "admin" role
+        
         if ($user->hasRole('admin') || $user->hasRole('Supervisor 1')|| $user->hasRole('manager'))  {
-            // Find the leave by its ID
+            
             $leave = Leave::find($id);
     
             if ($leave) {
-                // Update the approval status of the leave
+                
                 $leave->approval_status = "[ACCEPTED]";
                 $leave->save();
     
-                // Calculate the number of leave days
+                
                 $startDate = new \DateTime($leave->date_of_leave);
                 $endDate = new \DateTime($leave->end_of_leave);
-                $leaveDays = $endDate->diff($startDate)->days + 1; // Add 1 to include both start and end dates
+                $leaveDays = $endDate->diff($startDate)->days + 1; 
     
-                // Find the corresponding leave detail
+                
                 $leaveDetail = LeaveDetail::where('EmployeeID', $leave->staff_id)
                                           ->where('LeaveDesc', $leave->type_of_leave)
                                           ->first();
@@ -138,17 +138,17 @@ public function acceptRequest($id)
                     $leaveDetail->RemainingDays -= $leaveDays;
                     $leaveDetail->save();
                     return redirect('staffleaves')->with('success', 'Leave assigned successfully.');
-                    //return redirect()->back()->with('message', 'Request accepted successfully.');
+                   
                 } else {
-                    // Handle case where leave detail is not found
+                    
                     return redirect()->back()->with('error', 'Leave detail not found.');
                 }
             } else {
-                // Handle case where leave with the specified ID is not found
+                
                 return redirect()->back()->with('error', 'Leave not found.');
             }
         } else {
-            // Handle unauthorized access for non-admin users
+            
             return redirect()->back()->with('error', 'Unauthorized access.');
         }
 }
@@ -191,7 +191,7 @@ public function showLeaveData()
 public function deleteLeaveData($leaveId)
 {
     
-        // Find the leave record by its ID
+       
         $leave = Leave::findOrFail($leaveId);
 
         // Check if the leave is pending

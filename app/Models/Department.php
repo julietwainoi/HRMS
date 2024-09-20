@@ -14,10 +14,10 @@ class Department extends Model
         return $this->hasMany(Leave::class);
     }
 
-    public function leaves()
-    {
-        return $this->belongsToMany(Leave::class);
-    } 
+    //public function leaves()
+    //{
+       // return $this->belongsToMany(Leave::class);
+   // } 
     
 
 

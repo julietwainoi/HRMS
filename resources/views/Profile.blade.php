@@ -23,14 +23,20 @@
              
                         <tr>
                         <!-- Input fields -->
+                        <!--<td>id:"{{ $data->id}}"</td><br>-->
                         <td>staffNo:"{{ $data->StaffNo }}"</td><br>
                         
                          <td> "{{ $data->Names }}"</td><br>
 
                         <td> "{{ $data->email }}"</td><br>
-                            </tr>                      <!-- End of input fields -->
-                    <a href="{{ route('profile.edit', $data->StaffNo) }}" ><button type="submit" class="btn btn-primary">Update Profile</button></a>
-                    </form>
+                      
+                            </tr>
+                                            <!-- End of input fields -->
+                            <a href="{{ route('profile.edit', $data->StaffNo) }}">
+                                <button type="button" class="btn btn-primary">Update Profile</button>
+                            </a>
+                            
+                   
                 </div><!-- /.col -->
             </div><!-- /.row -->
         </div><!-- /.container-fluid -->

@@ -13,7 +13,7 @@ class LeaveDetail extends Model
         return $this->belongsTo(User::class);
     }
 
-    // Define the relationship with LeaveCode
+    
     public function leaveCodes()
     {
         return $this->belongsTo(LeaveCodes::class);

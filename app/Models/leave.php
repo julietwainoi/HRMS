@@ -51,7 +51,7 @@ class Leave extends Model
     }
     public function departments()
 {
-    return $this->belongsTo(Leave::class);
+    return $this->belongsTo(Department::class);
 }
   
 

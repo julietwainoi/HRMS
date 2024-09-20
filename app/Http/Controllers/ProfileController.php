@@ -13,34 +13,31 @@ class ProfileController extends Controller
     
      public function CurrentProfile()
     {
-        $IDNo = auth()->user()->IDNo;
+    
+       $id = auth()->user()->id;
+        
+    $data = DB::table('users')
+    ->select('IDNo as StaffNo','id', 'email', 'name as Names') // Rename columns as needed
+    ->where('id', $id) // Filter by 'id'
+    ->first(); // Get the first (and only) result
 
-        // Execute the parameterized query to fetch the data based on the authenticated user's IDNo
-        $data = DB::select("SELECT 
-            users.IDNo AS StaffNo,
-            users.email AS email,
-           users.name AS Names
-            FROM users 
-            WHERE IDNo =$IDNo");
-      
-      if (!empty($data)) {
-        // Extract the first element from the array (assuming there should be only one result)
-        $data = $data[0];
-    } else {
-        // Handle the case where no data is found, you might want to return a message or redirect
-        // For now, let's assign an empty object
-        $data = (object) [];
-    }
-
-    // Return the data to your view
-    return view('profile', compact('data'));
+if ($data === null) {
+    // Handle the case where no data is found
+    // For example, redirect or return an error message
+    $data = (object) []; // Assign an empty object or handle as needed
 }
+
+// Return the data to your view
+return view('profile', compact('data'));
+}
+
 public function edit($id)
 {
     $user =User::findOrFail($id);
+   
 //dump($user);
-    //return view('profileupdate', compact('user'));
-    return view('profileupdate')->with('user', $user);
+    return view('profileupdate', compact('user'));
+   //return view('profileupdate')->with('user', $user);
 }
 
 
