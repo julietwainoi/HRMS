@@ -198,7 +198,7 @@ public function deleteLeaveData($leaveId)
         if ($leave->approval_status === 'Pending') {
             // Delete the leave record
             $leave->delete();
-            return response()->json(['message' => 'Leave data deleted successfully']);
+            return response()->json(['message' => 'Leave data deletd successfully']);
         } else {
             // Return an error if the leave is not pending
             return response()->json(['error' => 'Leave is not pending and cannot be deleted'], 403);
